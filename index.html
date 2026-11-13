@@ -6,27 +6,64 @@
 <style>
 :root{--navy:#142b4a;--blue:#3568e8;--blue2:#edf2ff;--bg:#f4f6fb;--white:#fff;--ink:#202b3c;--muted:#7b8798;--line:#e8edf4;--green:#15966a;--greenbg:#e8f7f0;--orange:#c47a1b;--orangebg:#fff4df;--red:#c34b4b;--shadow:0 5px 22px #20365b0b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:10px 14px;font-weight:650}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:10px 14px;font-weight:650;transition:opacity .15s,transform .05s}button:hover{opacity:.92}button:active{transform:scale(.99)}
 .app{display:flex;min-height:100vh}.sidebar{width:245px;background:#142b4a;color:#d9e3f2;padding:24px 15px;display:flex;flex-direction:column;flex-shrink:0}
 .brand{font-size:24px;font-weight:850;color:white;padding:0 13px 26px;letter-spacing:-.8px}.brand span{color:#7da3ff}.tag{font-size:10px;color:#9eb0c9;letter-spacing:1.6px;padding:0 13px 12px}
 .nav{display:flex;flex-direction:column;gap:5px}.nav button{background:transparent;color:#b9c7dc;text-align:left;padding:12px 13px;font-weight:550;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:#ffffff18;color:white}.ico{width:20px;text-align:center;font-size:16px}.side-bottom{margin-top:auto;padding:14px 12px;color:#9fb0c9;font-size:12px;line-height:1.6}
 .main{flex:1;min-width:0}.topbar{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;gap:15px;position:sticky;top:0;z-index:4}
 .org{display:flex;align-items:center;gap:10px}.org label{font-size:12px;color:var(--muted)}.org select{border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:white;color:var(--navy);font-weight:650;max-width:220px}
 .topright{display:flex;align-items:center;gap:13px}.avatar{width:36px;height:36px;border-radius:50%;background:#e7edff;color:#315ed0;display:grid;place-items:center;font-weight:800}
-.content{padding:28px 32px;max-width:1500px;margin:auto}.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px}.heading h1{margin:0 0 6px;font-size:25px;color:var(--navy);letter-spacing:-.5px}.heading p{margin:0;color:var(--muted)}
+.content{padding:28px 32px;max-width:1500px;margin:auto}.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px;flex-wrap:wrap}.heading h1{margin:0 0 6px;font-size:25px;color:var(--navy);letter-spacing:-.5px}.heading p{margin:0;color:var(--muted)}
 .primary{background:var(--blue);color:white}.soft{background:var(--blue2);color:#315ed0}.plain{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0f0;color:var(--red)}.green{background:var(--greenbg);color:var(--green)}
-.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:19px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:10px;background:var(--blue2);display:grid;place-items:center;color:var(--blue);font-size:17px}.stat-value{font-size:25px;font-weight:800;color:var(--navy);margin:12px 0 5px}.stat-foot{font-size:11px;color:var(--muted)}.up{color:var(--green);font-weight:700}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:19px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:10px;background:var(--blue2);display:grid;place-items:center;color:var(--blue);font-size:17px}.stat-value{font-size:25px;font-weight:800;color:var(--navy);margin:12px 0 5px}.stat-foot{font-size:11px;color:var(--muted)}.up{color:var(--green);font-weight:700}.down{color:var(--red);font-weight:700}
 .dashboard-grid{grid-template-columns:1.55fr 1fr}.card-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.card-title h3{margin:0;color:var(--navy);font-size:15px}.card-title small{color:var(--muted)}
-.activity{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.activity:last-child{border:0}.dot{width:9px;height:9px;border-radius:50%;background:#5e86ed}.activity b{display:block;font-size:13px}.activity small{color:var(--muted);font-size:11px}.amount{margin-left:auto;font-weight:750;color:var(--navy)}
-.progress{height:7px;background:#eef1f6;border-radius:10px;overflow:hidden;margin-top:8px}.progress span{display:block;height:100%;background:var(--blue);border-radius:10px}
-.section{display:none}.section.active{display:block}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}.toolbar-left{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.search{border:1px solid var(--line);border-radius:9px;padding:10px 12px;min-width:210px;background:white}
-.table-card{padding:8px 18px 15px;overflow:hidden}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:720px}th{text-align:left;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:14px 10px;border-bottom:1px solid var(--line)}td{padding:14px 10px;border-bottom:1px solid #f0f2f6;font-size:12px}tbody tr:last-child td{border:0}.badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:10px;font-weight:750}.badge.good{background:var(--greenbg);color:var(--green)}.badge.low{background:var(--orangebg);color:var(--orange)}.badge.blue{background:var(--blue2);color:#315ed0}.actions{display:flex;gap:5px}.actions button{padding:6px 8px;font-size:11px}
-.info-grid{grid-template-columns:repeat(3,1fr)}.feature{padding:20px}.feature .ficon{font-size:23px;margin-bottom:12px}.feature h3{font-size:14px;color:var(--navy);margin:0 0 7px}.feature p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.activity{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.activity:last-child{border:0}.dot{width:9px;height:9px;border-radius:50%;background:#5e86ed;flex-shrink:0}.dot.inc{background:var(--green)}.dot.exp{background:var(--orange)}.activity b{display:block;font-size:13px}.activity small{color:var(--muted);font-size:11px}.amount{margin-left:auto;font-weight:750;color:var(--navy);white-space:nowrap}
+.progress{height:7px;background:#eef1f6;border-radius:10px;overflow:hidden;margin-top:8px}.progress span{display:block;height:100%;background:var(--blue);border-radius:10px;transition:width .3s ease}
+.section{display:none}.section.active{display:block}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar-left{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.search{border:1px solid var(--line);border-radius:9px;padding:10px 12px;min-width:200px;background:white}
+.table-card{padding:8px 18px 15px;overflow:hidden}.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{text-align:left;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:14px 10px;border-bottom:1px solid var(--line)}
+td{padding:14px 10px;border-bottom:1px solid #f0f2f6;font-size:12px}
+tbody tr:last-child td{border:0}
+.badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:10px;font-weight:750}
+.badge.good{background:var(--greenbg);color:var(--green)}
+.badge.low{background:var(--orangebg);color:var(--orange)}
+.badge.blue{background:var(--blue2);color:#315ed0}
+.actions{display:flex;gap:5px}.actions button{padding:6px 8px;font-size:11px}
+.info-grid{grid-template-columns:repeat(3,1fr)}
+.feature{padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;cursor:pointer;transition:border-color .15s,transform .15s}
+.feature:hover{border-color:#b9cdfc;transform:translateY(-2px)}
+.feature .ficon{font-size:23px;margin-bottom:10px}
+.feature h3{font-size:14px;color:var(--navy);margin:0 0 7px}
+.feature p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
 .notice{padding:13px 15px;border-radius:10px;background:#f1f5ff;color:#4b6294;font-size:12px;line-height:1.6;margin-bottom:16px}
-.form-modal{display:none;position:fixed;inset:0;background:#0d1c32a8;z-index:10;align-items:center;justify-content:center;padding:15px}.form-modal.show{display:flex}.dialog{width:min(510px,100%);background:white;border-radius:16px;padding:24px;max-height:92vh;overflow:auto;box-shadow:0 20px 80px #0003}.dialog h2{margin:0 0 5px;color:var(--navy)}.dialog>p{margin:0 0 18px;color:var(--muted);font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:5px 0}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#657186}.field input,.field select{padding:11px;border:1px solid var(--line);border-radius:8px;outline:none}.field input:focus,.field select:focus{border-color:var(--blue)}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
-.login-chip{font-size:11px;color:var(--muted)}.mobile-brand{display:none}
-@media(max-width:950px){.sidebar{width:205px}.content{padding:24px 20px}.topbar{padding:0 20px}.stats{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr}}
-@media(max-width:650px){.app{display:block}.sidebar{width:100%;padding:12px;display:block}.brand{padding:3px 8px 12px}.tag,.side-bottom{display:none}.nav{flex-direction:row;overflow-x:auto}.nav button{white-space:nowrap;padding:9px 11px;font-size:11px}.topbar{height:auto;padding:12px 15px}.org{gap:5px}.org label{display:none}.org select{max-width:155px}.content{padding:20px 13px}.heading h1{font-size:21px}.stats{gap:9px}.card{padding:15px}.stat-value{font-size:21px}.info-grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+.form-modal{display:none;position:fixed;inset:0;background:#0d1c32a8;z-index:10;align-items:center;justify-content:center;padding:15px}
+.form-modal.show{display:flex}
+.dialog{width:min(540px,100%);background:white;border-radius:16px;padding:24px;max-height:92vh;overflow:auto;box-shadow:0 20px 80px #0003}
+.dialog h2{margin:0 0 5px;color:var(--navy)}.dialog>p{margin:0 0 18px;color:var(--muted);font-size:12px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:6px;margin:5px 0}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:700;color:#657186}
+.field input,.field select,.field textarea{padding:11px;border:1px solid var(--line);border-radius:8px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.login-chip{font-size:11px;color:var(--muted)}
+.chat-box{background:#f8faff;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 14px;border-radius:11px;font-size:13px;line-height:1.55;max-width:88%}
+.msg.ai{background:white;border:1px solid var(--line);color:var(--ink);align-self:flex-start}
+.msg.user{background:var(--blue);color:white;align-self:flex-end}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip-btn{background:var(--blue2);color:#315ed0;font-size:12px;padding:7px 12px;border-radius:20px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.check-item:last-child{border:0}
+.report-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.report-row.total{font-weight:800;color:var(--navy);border-top:2px solid var(--line);border-bottom:0;padding-top:12px;margin-top:4px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--navy);color:white;padding:11px 16px;border-radius:10px;font-size:12px;font-weight:600;box-shadow:0 10px 30px #0003;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
@@ -34,7 +71,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
 <aside class="sidebar">
  <div class="brand">Fin<span>Ease</span></div>
  <div class="tag">ACCOUNTING PLATFORM</div>
- <nav class="nav">
+ <nav class="nav" id="sidebarNav">
   <button class="active" data-page="dashboard"><span class="ico">▦</span> Dashboard</button>
   <button data-page="transactions"><span class="ico">⇄</span> Transactions</button>
   <button data-page="ledger"><span class="ico">▤</span> General Ledger</button>
@@ -52,59 +89,703 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
   <div class="topright"><span class="login-chip" id="adminState">View mode</span><button class="plain" id="adminBtn">Admin login</button><div class="avatar">FE</div></div>
  </header>
  <main class="content">
+  <!-- DASHBOARD -->
   <section class="section active" id="dashboard">
-   <div class="heading"><div><h1>Good day! Welcome to FinEase.</h1><p>Here's an overview of your organization's accounting activity.</p></div><button class="primary" onclick="showPage('transactions')">＋ New transaction</button></div>
+   <div class="heading"><div><h1>Good day! Welcome to FinEase.</h1><p id="orgSubtitle">Here's an overview of your Private Business accounting activity.</p></div><button class="primary" id="dashNewTxBtn">＋ New transaction</button></div>
    <div class="grid stats">
-    <div class="card"><div class="stat-top">Total Revenue <span class="stat-icon">₱</span></div><div class="stat-value">₱248,500</div><div class="stat-foot"><span class="up">↑ 8.2%</span> compared with last month</div></div>
-    <div class="card"><div class="stat-top">Total Expenses <span class="stat-icon">↗</span></div><div class="stat-value">₱96,250</div><div class="stat-foot">Recorded operating expenses</div></div>
-    <div class="card"><div class="stat-top">Net Income <span class="stat-icon">▥</span></div><div class="stat-value">₱152,250</div><div class="stat-foot"><span class="up">Positive</span> current period result</div></div>
+    <div class="card"><div class="stat-top">Total Revenue <span class="stat-icon">₱</span></div><div class="stat-value" id="dashRev">₱0.00</div><div class="stat-foot"><span class="up">Live</span> recorded income</div></div>
+    <div class="card"><div class="stat-top">Total Expenses <span class="stat-icon">↗</span></div><div class="stat-value" id="dashExp">₱0.00</div><div class="stat-foot">Recorded operating expenses</div></div>
+    <div class="card"><div class="stat-top">Net Income <span class="stat-icon">▥</span></div><div class="stat-value" id="dashNet">₱0.00</div><div class="stat-foot" id="dashNetFoot"><span class="up">Positive</span> current period result</div></div>
     <div class="card"><div class="stat-top">Inventory Items <span class="stat-icon">▣</span></div><div class="stat-value" id="dashCount">4</div><div class="stat-foot"><span id="dashLow">1</span> item(s) need attention</div></div>
    </div>
    <div class="grid dashboard-grid">
-    <div class="card"><div class="card-title"><h3>Recent Transactions</h3><button class="soft" onclick="showPage('transactions')">View all</button></div>
-     <div class="activity"><span class="dot"></span><div><b>Office supplies purchase</b><small>Today · Expense</small></div><span class="amount">− ₱4,500</span></div>
-     <div class="activity"><span class="dot"></span><div><b>Service revenue received</b><small>Yesterday · Income</small></div><span class="amount">+ ₱18,000</span></div>
-     <div class="activity"><span class="dot"></span><div><b>Internet and utilities</b><small>Nov 10 · Expense</small></div><span class="amount">− ₱2,300</span></div>
-     <div class="activity"><span class="dot"></span><div><b>Client payment</b><small>Nov 09 · Income</small></div><span class="amount">+ ₱12,500</span></div>
+    <div class="card"><div class="card-title"><h3>Recent Transactions</h3><button class="soft" id="dashViewAllTx">View all</button></div>
+     <div id="recentTxList"></div>
     </div>
-    <div class="card"><div class="card-title"><h3>Financial Snapshot</h3><small>Sample data</small></div><div style="font-size:12px;color:var(--muted)">Income</div><div class="progress"><span style="width:85%"></span></div><div style="display:flex;justify-content:space-between;margin:8px 0 18px;font-size:12px"><b>₱248,500</b><span style="color:var(--muted)">85%</span></div><div style="font-size:12px;color:var(--muted)">Expenses</div><div class="progress"><span style="width:38%;background:#e8a64d"></span></div><div style="display:flex;justify-content:space-between;margin:8px 0 18px;font-size:12px"><b>₱96,250</b><span style="color:var(--muted)">38%</span></div><div class="notice" style="margin:0">Your sample records are organized and ready for review.</div></div>
+    <div class="card"><div class="card-title"><h3>Financial Snapshot</h3><small>Auto-synced</small></div>
+     <div style="font-size:12px;color:var(--muted)">Income Share</div>
+     <div class="progress"><span id="incBar" style="width:72%"></span></div>
+     <div style="display:flex;justify-content:space-between;margin:8px 0 18px;font-size:12px"><b id="snapRev">₱0.00</b><span style="color:var(--muted)" id="incPct">0%</span></div>
+     <div style="font-size:12px;color:var(--muted)">Expense Ratio</div>
+     <div class="progress"><span id="expBar" style="width:28%;background:#e8a64d"></span></div>
+     <div style="display:flex;justify-content:space-between;margin:8px 0 18px;font-size:12px"><b id="snapExp">₱0.00</b><span style="color:var(--muted)" id="expPct">0%</span></div>
+     <div class="notice" style="margin:0" id="snapNote">Your records are balanced and up to date.</div>
+    </div>
    </div>
   </section>
-  <section class="section" id="transactions"><div class="heading"><div><h1>Transactions</h1><p>Record and organize your organization's financial activities.</p></div><button class="primary" onclick="alert('Transaction entry is a planned demo feature.')">＋ Add transaction</button></div><div class="notice">This prototype shows sample transactions. Full journal posting and accounting calculations are planned for a future version.</div><div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Account</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>Nov 13, 2026</td><td>Office supplies purchase</td><td>Office Supplies Expense</td><td>Expense</td><td>₱4,500</td><td><span class="badge good">Recorded</span></td></tr><tr><td>Nov 12, 2026</td><td>Service revenue received</td><td>Service Revenue</td><td>Income</td><td>₱18,000</td><td><span class="badge good">Recorded</span></td></tr><tr><td>Nov 10, 2026</td><td>Internet and utilities</td><td>Utilities Expense</td><td>Expense</td><td>₱2,300</td><td><span class="badge good">Recorded</span></td></tr></tbody></table></div></div></section>
-  <section class="section" id="ledger"><div class="heading"><div><h1>General Ledger</h1><p>View transactions grouped by their respective accounts.</p></div></div><div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th><th>Balance</th></tr></thead><tbody><tr><td>Cash</td><td>₱30,500</td><td>₱6,800</td><td>₱23,700 Dr</td></tr><tr><td>Service Revenue</td><td>—</td><td>₱30,500</td><td>₱30,500 Cr</td></tr><tr><td>Office Supplies Expense</td><td>₱4,500</td><td>—</td><td>₱4,500 Dr</td></tr><tr><td>Utilities Expense</td><td>₱2,300</td><td>—</td><td>₱2,300 Dr</td></tr></tbody></table></div></div></section>
-  <section class="section" id="inventory"><div class="heading"><div><h1>Inventory Management</h1><p>Track supplies, merchandise, and equipment in one place.</p></div><button class="primary" id="addItemBtn" type="button">＋ Add Item</button></div><div class="toolbar"><div class="toolbar-left"><input class="search" id="search" placeholder="Search inventory..."><select class="search" id="categoryFilter"><option value="">All categories</option><option>Office Supplies</option><option>Equipment</option><option>Merchandise</option><option>Raw Materials</option><option>Other</option></select></div><span class="login-chip" id="inventoryMode">Admin access required to edit</span></div><div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Item Code</th><th>Item Name</th><th>Category</th><th>Quantity</th><th>Unit</th><th>Unit Price</th><th>Stock Status</th><th>Actions</th></tr></thead><tbody id="inventoryRows"></tbody></table></div></div></section>
-  <section class="section" id="tax"><div class="heading"><div><h1>Tax Center</h1><p>Keep tax records and important filing dates organized.</p></div></div><div class="grid info-grid"><div class="card feature"><div class="ficon">🗓️</div><h3>Tax Calendar</h3><p>Monitor upcoming tax deadlines and compliance reminders.</p></div><div class="card feature"><div class="ficon">🧾</div><h3>Tax Records</h3><p>Organize supporting documents and tax-related transactions.</p></div><div class="card feature"><div class="ficon">✓</div><h3>Filing Checklist</h3><p>Track the documents and steps needed for tax preparation.</p></div></div></section>
-  <section class="section" id="reports"><div class="heading"><div><h1>Financial Reports</h1><p>Review key reports for better financial decision-making.</p></div><button class="plain" onclick="alert('Report export will be available in a future version.')">Export report ↓</button></div><div class="grid info-grid"><div class="card feature"><div class="ficon">📊</div><h3>Income Statement</h3><p>Summarizes income, expenses, and net income for a selected period.</p></div><div class="card feature"><div class="ficon">⚖️</div><h3>Balance Sheet</h3><p>Shows assets, liabilities, and equity at a specific date.</p></div><div class="card feature"><div class="ficon">💧</div><h3>Cash Flow Statement</h3><p>Summarizes cash inflows and outflows from business activities.</p></div></div></section>
-  <section class="section" id="assistant"><div class="heading"><div><h1>AI Accounting Assistant</h1><p>Get help understanding accounting tasks and reviewing entries.</p></div></div><div class="card" style="max-width:760px"><div style="font-size:28px;margin-bottom:10px">✧</div><h3 style="color:var(--navy)">How can I help with your accounting work?</h3><p style="color:var(--muted);line-height:1.7">The AI assistant is designed to help flag possible recording errors, explain accounting concepts, and guide users through common tasks. Always review suggestions before using them in official records.</p><button class="soft" onclick="alert('AI assistant connection is a planned feature.')">Try sample assistance</button></div></section>
-  <section class="section" id="security"><div class="heading"><div><h1>Security & Backup</h1><p>Protect accounting information and manage user access.</p></div></div><div class="grid info-grid"><div class="card feature"><div class="ficon">🔐</div><h3>Role-Based Access</h3><p>Give users access based on their assigned responsibilities.</p></div><div class="card feature"><div class="ficon">🗂️</div><h3>Automatic Backup</h3><p>Keep backup copies to help protect records from data loss.</p></div><div class="card feature"><div class="ficon">📝</div><h3>Activity Logs</h3><p>Review important account activity and changes made by users.</p></div></div><div class="notice" style="margin-top:16px">Security and backup tools are concept features only. This prototype does not store confidential accounting data or perform real cloud backups.</div></section>
+
+  <!-- TRANSACTIONS -->
+  <section class="section" id="transactions">
+   <div class="heading"><div><h1>Transactions</h1><p>Record and organize your organization's financial activities.</p></div><button class="primary" id="txNewBtn">＋ Add transaction</button></div>
+   <div class="toolbar">
+    <div class="toolbar-left">
+     <input class="search" id="txSearch" placeholder="Search description or account...">
+     <select class="search" id="txTypeFilter"><option value="">All types</option><option value="Income">Income</option><option value="Expense">Expense</option></select>
+    </div>
+    <span class="login-chip" id="txCountLabel">0 transactions</span>
+   </div>
+   <div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Account</th><th>Type</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="txRows"></tbody></table></div></div>
+  </section>
+
+  <!-- GENERAL LEDGER -->
+  <section class="section" id="ledger">
+   <div class="heading"><div><h1>General Ledger</h1><p>Automatically posted double-entry balances grouped by account.</p></div><button class="plain" id="ledgerPostBtn">＋ Post journal entry</button></div>
+   <div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Account</th><th>Category</th><th>Total Debit</th><th>Total Credit</th><th>Ending Balance</th></tr></thead><tbody id="ledgerRows"></tbody></table></div></div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section class="section" id="inventory">
+   <div class="heading"><div><h1>Inventory Management</h1><p>Track supplies, merchandise, and equipment in one place.</p></div><button class="primary" id="addItemBtn" type="button">＋ Add Item</button></div>
+   <div class="toolbar"><div class="toolbar-left"><input class="search" id="search" placeholder="Search inventory..."><select class="search" id="categoryFilter"><option value="">All categories</option><option>Office Supplies</option><option>Equipment</option><option>Merchandise</option><option>Raw Materials</option><option>Other</option></select></div><span class="login-chip" id="inventoryMode">Admin access required to edit</span></div>
+   <div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Item Code</th><th>Item Name</th><th>Category</th><th>Quantity</th><th>Unit</th><th>Unit Price</th><th>Stock Status</th><th>Actions</th></tr></thead><tbody id="inventoryRows"></tbody></table></div></div>
+  </section>
+
+  <!-- TAX CENTER -->
+  <section class="section" id="tax">
+   <div class="heading"><div><h1>Tax Center</h1><p>Keep tax records, VAT estimates, and important filing dates organized.</p></div><button class="soft" id="taxChecklistBtn">Open Filing Checklist</button></div>
+   <div class="grid info-grid">
+    <div class="card feature" id="taxCalendarCard"><div><div class="ficon">🗓️</div><h3>Tax Calendar</h3><p>Monitor upcoming BIR / local tax deadlines and compliance reminders.</p></div><span class="badge blue" style="align-self:flex-start">View Deadlines →</span></div>
+    <div class="card feature" id="taxRecordsCard"><div><div class="ficon">🧾</div><h3>Tax Records & VAT</h3><p>View estimated 12% output/input VAT and taxable transaction summaries.</p></div><span class="badge good" style="align-self:flex-start">View Tax Summary →</span></div>
+    <div class="card feature" id="taxTasksCard"><div><div class="ficon">✓</div><h3>Filing Checklist</h3><p>Track the documents and steps needed for periodic tax preparation.</p></div><span class="badge low" style="align-self:flex-start">Manage Tasks →</span></div>
+   </div>
+  </section>
+
+  <!-- REPORTS -->
+  <section class="section" id="reports">
+   <div class="heading"><div><h1>Financial Reports</h1><p>Review live generated statements for better financial decision-making.</p></div><button class="primary" id="exportCsvBtn">Export CSV report ↓</button></div>
+   <div class="grid info-grid">
+    <div class="card feature" id="repIncomeCard"><div><div class="ficon">📊</div><h3>Income Statement</h3><p>Summarizes revenue, operating expenses, and net income for the current period.</p></div><span class="badge blue" style="align-self:flex-start">Generate Statement →</span></div>
+    <div class="card feature" id="repBalanceCard"><div><div class="ficon">⚖️</div><h3>Balance Sheet</h3><p>Shows Cash, Inventory Assets, Liabilities, and Owner's Equity.</p></div><span class="badge good" style="align-self:flex-start">Generate Balance Sheet →</span></div>
+    <div class="card feature" id="repCashflowCard"><div><div class="ficon">💧</div><h3>Cash Flow Statement</h3><p>Summarizes cash inflows and outflows from recorded operating activities.</p></div><span class="badge blue" style="align-self:flex-start">Generate Cash Flow →</span></div>
+   </div>
+  </section>
+
+  <!-- AI ASSISTANT -->
+  <section class="section" id="assistant">
+   <div class="heading"><div><h1>AI Accounting Assistant</h1><p>Analyze your live FinEase ledger, check margins, and verify journal entries.</p></div></div>
+   <div class="card" style="max-width:820px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:24px">✧</span><h3 style="color:var(--navy);margin:0">FinEase Smart Auditor</h3></div>
+    <p style="color:var(--muted);line-height:1.6;margin-top:0">Ask a question or pick a quick audit check below to analyze your current transactions and inventory.</p>
+    <div class="chip-row">
+     <button class="chip-btn" type="button" onclick="askAI('Summarize my financial health')">📊 Summarize financial health</button>
+     <button class="chip-btn" type="button" onclick="askAI('Check inventory alerts')">📦 Check inventory alerts</button>
+     <button class="chip-btn" type="button" onclick="askAI('How are my transactions posted to the ledger?')">📘 Explain ledger posting</button>
+     <button class="chip-btn" type="button" onclick="askAI('Estimate my tax liability')">🧾 Estimate VAT / tax</button>
+    </div>
+    <div class="chat-box" id="chatBox">
+     <div class="msg ai">Hello! I'm connected to your live FinEase records. Click any prompt above or ask me about your revenue, expenses, ledger balances, or inventory.</div>
+    </div>
+    <form id="aiForm" style="display:flex;gap:8px">
+     <input class="search" id="aiInput" style="flex:1" placeholder="Ask about your finances..." required>
+     <button class="primary" type="submit">Ask AI</button>
+    </form>
+   </div>
+  </section>
+
+  <!-- SECURITY & BACKUP -->
+  <section class="section" id="security">
+   <div class="heading"><div><h1>Security & Backup</h1><p>Manage administrator access, backup JSON files, and view audit logs.</p></div><button class="primary" id="secDownloadBtn">Download JSON Backup ↓</button></div>
+   <div class="grid info-grid">
+    <div class="card feature" id="secRoleCard"><div><div class="ficon">🔐</div><h3>Role-Based Access</h3><p>Currently in <b id="secRoleText">View mode</b>. Click to toggle Administrator credentials.</p></div><span class="badge blue" style="align-self:flex-start">Toggle Access →</span></div>
+    <div class="card feature" id="secExportCard"><div><div class="ficon">🗂️</div><h3>Backup & Restore</h3><p>Export all transactions, ledger data, and inventory to a local backup file.</p></div><span class="badge good" style="align-self:flex-start">Export Data →</span></div>
+    <div class="card feature" id="secResetCard"><div><div class="ficon">↺</div><h3>Reset Demo Data</h3><p>Restore default sample transactions and inventory items to start fresh.</p></div><span class="badge low" style="align-self:flex-start">Reset Records →</span></div>
+   </div>
+   <div class="card" style="margin-top:16px">
+    <div class="card-title"><h3>System Activity Logs</h3><small>Recent session audit trail</small></div>
+    <div id="auditLogs"></div>
+   </div>
+  </section>
  </main>
 </div>
 </div>
-<div class="form-modal" id="loginModal"><div class="dialog"><h2>Admin Login</h2><p>Sign in to manage FinEase inventory.</p><div class="field"><label>Username</label><input id="username" value="admin"></div><div class="field"><label>Password</label><input id="password" type="password" placeholder="Enter password"></div><div class="notice">Sign in with your administrator credentials.</div><div class="dialog-actions"><button class="plain" onclick="closeLogin()">Cancel</button><button class="primary" onclick="login()">Sign in</button></div></div></div>
+
+<!-- LOGIN MODAL -->
+<div class="form-modal" id="loginModal"><div class="dialog"><h2>Admin Login</h2><p>Sign in to manage FinEase inventory and protected actions.</p><div class="field"><label>Username</label><input id="username" value="admin"></div><div class="field"><label>Password</label><input id="password" type="password" value="finEaseDemo2026" placeholder="Enter password"></div><div class="notice">Demo credentials pre-filled: <b>admin</b> / <b>finEaseDemo2026</b></div><div class="dialog-actions"><button type="button" class="plain" id="loginCancelBtn">Cancel</button><button type="button" class="primary" id="loginSubmitBtn">Sign in</button></div></div></div>
+
+<!-- TRANSACTION MODAL -->
+<div class="form-modal" id="txModal">
+ <div class="dialog">
+  <h2 id="txFormTitle">Add Transaction</h2>
+  <p>Record an income or expense entry. This automatically posts to the General Ledger.</p>
+  <form id="txForm">
+   <input type="hidden" id="txEditIndex">
+   <div class="formgrid">
+    <div class="field"><label>Date</label><input id="txDate" type="date" required></div>
+    <div class="field"><label>Type</label>
+     <select id="txType">
+      <option value="Income">Income (Cash Inflow)</option>
+      <option value="Expense">Expense (Cash Outflow)</option>
+     </select>
+    </div>
+    <div class="field full"><label>Description</label><input id="txDesc" required placeholder="e.g. Client retainer fee or Office supplies"></div>
+    <div class="field"><label>Account</label><select id="txAccount"></select></div>
+    <div class="field"><label>Amount (₱)</label><input id="txAmount" type="number" min="0.01" step="0.01" required placeholder="0.00"></div>
+    <div class="field full"><label>Status</label>
+     <select id="txStatus"><option value="Recorded">Recorded</option><option value="Pending Review">Pending Review</option></select>
+    </div>
+   </div>
+   <div class="dialog-actions">
+    <button type="button" class="plain" id="txCancelBtn">Cancel</button>
+    <button type="submit" class="primary">Save Transaction</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!-- INVENTORY MODAL -->
 <div class="form-modal" id="itemModal"><div class="dialog"><h2 id="formTitle">Add inventory item</h2><p>Enter the item details below.</p><form id="itemForm"><input type="hidden" id="editIndex"><div class="formgrid">
 <div class="field"><label>Item Code</label><input id="code" required placeholder="e.g. SUP-005"></div><div class="field"><label>Item Name</label><input id="name" required placeholder="Item name"></div>
 <div class="field"><label>Category</label><select id="category"><option>Office Supplies</option><option>Equipment</option><option>Merchandise</option><option>Raw Materials</option><option>Other</option></select></div><div class="field"><label>Quantity</label><input id="qty" type="number" min="0" required></div>
-<div class="field"><label>Unit</label><input id="unit" required placeholder="pcs, boxes, reams"></div><div class="field"><label>Unit Price (₱)</label><input id="price" type="number" min="0" step=".01" required></div></div><div class="dialog-actions"><button type="button" class="plain" onclick="closeItem()">Cancel</button><button class="primary" type="submit">Save Item</button></div></form></div></div>
+<div class="field"><label>Unit</label><input id="unit" required placeholder="pcs, boxes, reams"></div><div class="field"><label>Unit Price (₱)</label><input id="price" type="number" min="0" step=".01" required></div></div><div class="dialog-actions"><button type="button" class="plain" id="itemCancelBtn">Cancel</button><button class="primary" type="submit">Save Item</button></div></form></div></div>
+
+<!-- INFO / REPORT / TAX MODAL -->
+<div class="form-modal" id="infoModal">
+ <div class="dialog">
+  <h2 id="infoTitle">Report</h2>
+  <p id="infoSubtitle">Generated from live FinEase records</p>
+  <div id="infoBody"></div>
+  <div class="dialog-actions">
+   <button type="button" class="plain" id="infoCloseBtn">Close</button>
+   <button type="button" class="primary" id="infoExportCsvBtn">Export CSV</button>
+  </div>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-const starter=[{code:'SUP-001',name:'Bond Paper',category:'Office Supplies',qty:120,unit:'reams',price:185},{code:'SUP-002',name:'Ballpen',category:'Office Supplies',qty:60,unit:'pcs',price:12},{code:'EQP-001',name:'Printer',category:'Equipment',qty:5,unit:'units',price:6500},{code:'SUP-003',name:'Folder',category:'Office Supplies',qty:20,unit:'pcs',price:8}];
-let items=JSON.parse(localStorage.getItem('finease_items_universal')||'null')||starter,isAdmin=false,pendingAdd=false;
+const starterItems=[
+ {code:'SUP-001',name:'Bond Paper',category:'Office Supplies',qty:120,unit:'reams',price:185},
+ {code:'SUP-002',name:'Ballpen',category:'Office Supplies',qty:60,unit:'pcs',price:12},
+ {code:'EQP-001',name:'Printer',category:'Equipment',qty:5,unit:'units',price:6500},
+ {code:'SUP-003',name:'Folder',category:'Office Supplies',qty:20,unit:'pcs',price:8}
+];
+
+const starterTx=[
+ {date:'2026-11-13',desc:'Office supplies purchase',account:'Office Supplies Expense',type:'Expense',amount:4500,status:'Recorded'},
+ {date:'2026-11-12',desc:'Service revenue received',account:'Service Revenue',type:'Income',amount:18000,status:'Recorded'},
+ {date:'2026-11-10',desc:'Internet and utilities',account:'Utilities Expense',type:'Expense',amount:2300,status:'Recorded'},
+ {date:'2026-11-09',desc:'Client payment',account:'Service Revenue',type:'Income',amount:12500,status:'Recorded'}
+];
+
+const starterChecklist=[
+ {text:'Reconcile Cash and Bank statements',done:true},
+ {text:'Verify Official Receipts (OR) and Sales Invoices',done:true},
+ {text:'Review VAT / Percentage Tax summary',done:false},
+ {text:'Export monthly General Ledger backup',done:false}
+];
+
+const incomeAccounts=['Service Revenue','Sales Revenue','Consulting Income','Other Income'];
+const expenseAccounts=['Office Supplies Expense','Utilities Expense','Rent Expense','Salaries & Wages','Equipment & Maintenance','Taxes & Licenses'];
+
+let items=JSON.parse(localStorage.getItem('finease_items_universal')||'null')||structuredClone(starterItems);
+let transactions=JSON.parse(localStorage.getItem('finease_tx_universal')||'null')||structuredClone(starterTx);
+let checklist=JSON.parse(localStorage.getItem('finease_tax_checks')||'null')||structuredClone(starterChecklist);
+let logs=JSON.parse(localStorage.getItem('finease_logs')||'null')||[{time:'System Init',msg:'FinEase workspace loaded'}];
+
+let isAdmin=false,pendingAdd=false;
 const $=id=>document.getElementById(id);
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function save(){localStorage.setItem('finease_items_universal',JSON.stringify(items));render()}
-function render(){let q=$('search').value.toLowerCase(),cat=$('categoryFilter').value;let filtered=items.map((x,i)=>({...x,_i:i})).filter(x=>(!q||(x.name+' '+x.code+' '+x.category).toLowerCase().includes(q))&&(!cat||x.category===cat));$('inventoryRows').innerHTML=filtered.map(x=>`<tr><td>${esc(x.code)}</td><td><b>${esc(x.name)}</b></td><td>${esc(x.category)}</td><td>${x.qty}</td><td>${esc(x.unit)}</td><td>₱${Number(x.price).toLocaleString('en-PH',{minimumFractionDigits:2})}</td><td><span class="badge ${x.qty<=10?'low':'good'}">${x.qty<=10?'Low stock':'In stock'}</span></td><td><div class="actions">${isAdmin?`<button class="soft" onclick="editItem(${x._i})">Edit</button><button class="plain" onclick="releaseItem(${x._i})">Release</button><button class="danger" onclick="deleteItem(${x._i})">Delete</button>`:'<span style="color:#98a2b3">View only</span>'}</div></td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:#8792a2;padding:25px">No inventory items found.</td></tr>';$('dashCount').textContent=items.length;$('dashLow').textContent=items.filter(x=>x.qty<=10).length}
-function showPage(id){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-$('adminBtn').onclick=()=>isAdmin?(isAdmin=false,updateAdmin()):$('loginModal').classList.add('show');
-function closeLogin(){$('loginModal').classList.remove('show')}
-function login(){if($('username').value==='admin'&&$('password').value==='finEaseDemo2026'){isAdmin=true;closeLogin();updateAdmin();if(pendingAdd){pendingAdd=false;openAddItem()}}else alert('Incorrect demo login.')}
-function updateAdmin(){$('adminState').textContent=isAdmin?'Administrator mode':'View mode';$('adminBtn').textContent=isAdmin?'Sign out':'Admin login';$('addItemBtn').disabled=false;$('inventoryMode').textContent=isAdmin?'You can manage inventory':'Admin access required to edit';render()}
+const fmt=n=>'₱'+Number(n||0).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;T'}[c]||c))}
+
+function toast(msg){
+ const t=$('toast');if(!t)return;
+ t.textContent=msg;t.classList.add('show');
+ clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+function addLog(msg){
+ const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+ logs.unshift({time:now,msg});
+ if(logs.length>12)logs.pop();
+ localStorage.setItem('finease_logs',JSON.stringify(logs));
+ renderLogs();
+}
+
+function saveAll(){
+ localStorage.setItem('finease_items_universal',JSON.stringify(items));
+ localStorage.setItem('finease_tx_universal',JSON.stringify(transactions));
+ localStorage.setItem('finease_tax_checks',JSON.stringify(checklist));
+ renderAll();
+}
+
+function renderAll(){
+ renderFinancials();
+ renderTransactions();
+ renderLedger();
+ renderInventory();
+ renderLogs();
+}
+
+/* FINANCIALS & DASHBOARD */
+function renderFinancials(){
+ const totalRev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const totalExp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const net=totalRev-totalExp;
+ const totalFlow=totalRev+totalExp;
+ const incPct=totalFlow?Math.round((totalRev/totalFlow)*100):0;
+ const expPct=totalFlow?100-incPct:0;
+
+ if($('dashRev'))$('dashRev').textContent=fmt(totalRev);
+ if($('dashExp'))$('dashExp').textContent=fmt(totalExp);
+ if($('dashNet'))$('dashNet').textContent=fmt(net);
+ if($('dashNetFoot'))$('dashNetFoot').innerHTML=net>=0?'<span class="up">Positive</span> current period result':'<span class="down">Deficit</span> expenses exceed income';
+
+ if($('snapRev'))$('snapRev').textContent=fmt(totalRev);
+ if($('snapExp'))$('snapExp').textContent=fmt(totalExp);
+ if($('incPct'))$('incPct').textContent=incPct+'%';
+ if($('expPct'))$('expPct').textContent=expPct+'%';
+ if($('incBar'))$('incBar').style.width=incPct+'%';
+ if($('expBar'))$('expBar').style.width=expPct+'%';
+ if($('snapNote'))$('snapNote').textContent=net>=0
+  ? `Net surplus of ${fmt(net)} across ${transactions.length} recorded transaction(s).`
+  : `Expenses exceed revenue by ${fmt(Math.abs(net))}. Review operating costs.`;
+
+ const recent=[...transactions].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+ if($('recentTxList'))$('recentTxList').innerHTML=recent.map(t=>`
+  <div class="activity">
+   <span class="dot ${t.type==='Income'?'inc':'exp'}"></span>
+   <div><b>${esc(t.desc)}</b><small>${esc(t.date)} · ${esc(t.account)}</small></div>
+   <span class="amount" style="color:${t.type==='Income'?'var(--green)':'var(--navy)'}">${t.type==='Income'?'+':'-'} ${fmt(t.amount)}</span>
+  </div>
+ `).join('')||'<p style="color:var(--muted);font-size:12px">No transactions recorded yet.</p>';
+}
+
+/* TRANSACTIONS CRUD */
+function syncTxAccounts(selected=''){
+ const type=$('txType').value;
+ const list=type==='Income'?incomeAccounts:expenseAccounts;
+ $('txAccount').innerHTML=list.map(a=>`<option value="${a}" ${a===selected?'selected':''}>${a}</option>`).join('');
+}
+
+function openAddTx(){
+ $('txForm').reset();
+ $('txEditIndex').value='';
+ $('txDate').value=new Date().toISOString().split('T')[0];
+ $('txType').value='Income';
+ syncTxAccounts();
+ $('txFormTitle').textContent='Add Transaction';
+ $('txModal').classList.add('show');
+}
+
+function editTx(i){
+ const t=transactions[i];
+ $('txEditIndex').value=i;
+ $('txDate').value=t.date;
+ $('txType').value=t.type;
+ syncTxAccounts(t.account);
+ $('txDesc').value=t.desc;
+ $('txAmount').value=t.amount;
+ $('txStatus').value=t.status;
+ $('txFormTitle').textContent='Edit Transaction';
+ $('txModal').classList.add('show');
+}
+
+function deleteTx(i){
+ if(!confirm('Delete transaction: '+transactions[i].desc+'?'))return;
+ const removed=transactions.splice(i,1)[0];
+ addLog(`Deleted transaction "${removed.desc}" (${fmt(removed.amount)})`);
+ saveAll();
+ toast('Transaction deleted');
+}
+
+function closeTxModal(){$('txModal').classList.remove('show')}
+
+function renderTransactions(){
+ const q=$('txSearch').value.toLowerCase();
+ const typeF=$('txTypeFilter').value;
+ const filtered=transactions.map((t,i)=>({...t,_i:i})).filter(t=>
+  (!q||(t.desc+' '+t.account+' '+t.date).toLowerCase().includes(q))&&
+  (!typeF||t.type===typeF)
+ );
+ if($('txCountLabel'))$('txCountLabel').textContent=`${filtered.length} transaction(s)`;
+ if($('txRows'))$('txRows').innerHTML=filtered.map(t=>`
+  <tr>
+   <td>${esc(t.date)}</td>
+   <td><b>${esc(t.desc)}</b></td>
+   <td>${esc(t.account)}</td>
+   <td><span class="badge ${t.type==='Income'?'good':'low'}">${esc(t.type)}</span></td>
+   <td><b>${fmt(t.amount)}</b></td>
+   <td><span class="badge ${t.status==='Recorded'?'blue':'low'}">${esc(t.status)}</span></td>
+   <td><div class="actions">
+    <button type="button" class="soft" onclick="editTx(${t._i})">Edit</button>
+    <button type="button" class="danger" onclick="deleteTx(${t._i})">Delete</button>
+   </div></td>
+  </tr>
+ `).join('')||'<tr><td colspan="7" style="text-align:center;color:#8792a2;padding:25px">No matching transactions found.</td></tr>';
+}
+
+/* GENERAL LEDGER */
+function renderLedger(){
+ let cashDr=0,cashCr=0;
+ const accounts={};
+ transactions.forEach(t=>{
+  const amt=Number(t.amount);
+  if(t.type==='Income'){
+   cashDr+=amt;
+   if(!accounts[t.account])accounts[t.account]={cat:'Revenue',dr:0,cr:0};
+   accounts[t.account].cr+=amt;
+  }else{
+   cashCr+=amt;
+   if(!accounts[t.account])accounts[t.account]={cat:'Expense',dr:0,cr:0};
+   accounts[t.account].dr+=amt;
+  }
+ });
+ const cashBal=cashDr-cashCr;
+ let rows=`<tr>
+  <td><b>Cash</b></td><td>Asset</td>
+  <td>${fmt(cashDr)}</td><td>${fmt(cashCr)}</td>
+  <td><b>${fmt(Math.abs(cashBal))} ${cashBal>=0?'Dr':'Cr'}</b></td>
+ </tr>`;
+
+ Object.entries(accounts).forEach(([acc,v])=>{
+  const bal=v.dr-v.cr;
+  rows+=`<tr>
+   <td><b>${esc(acc)}</b></td><td>${v.cat}</td>
+   <td>${v.dr?fmt(v.dr):'—'}</td><td>${v.cr?fmt(v.cr):'—'}</td>
+   <td><b>${fmt(Math.abs(bal))} ${bal>=0?'Dr':'Cr'}</b></td>
+  </tr>`;
+ });
+ if($('ledgerRows'))$('ledgerRows').innerHTML=rows;
+}
+
+/* INVENTORY CRUD */
+function renderInventory(){
+ let q=$('search').value.toLowerCase(),cat=$('categoryFilter').value;
+ let filtered=items.map((x,i)=>({...x,_i:i})).filter(x=>(!q||(x.name+' '+x.code+' '+x.category).toLowerCase().includes(q))&&(!cat||x.category===cat));
+ if($('inventoryRows'))$('inventoryRows').innerHTML=filtered.map(x=>`<tr><td>${esc(x.code)}</td><td><b>${esc(x.name)}</b></td><td>${esc(x.category)}</td><td>${x.qty}</td><td>${esc(x.unit)}</td><td>${fmt(x.price)}</td><td><span class="badge ${x.qty<=10?'low':'good'}">${x.qty<=10?'Low stock':'In stock'}</span></td><td><div class="actions">${isAdmin?`<button type="button" class="soft" onclick="editItem(${x._i})">Edit</button><button type="button" class="plain" onclick="releaseItem(${x._i})">Release</button><button type="button" class="danger" onclick="deleteItem(${x._i})">Delete</button>`:'<span style="color:#98a2b3">View only</span>'}</div></td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:#8792a2;padding:25px">No inventory items found.</td></tr>';
+ if($('dashCount'))$('dashCount').textContent=items.length;
+ if($('dashLow'))$('dashLow').textContent=items.filter(x=>x.qty<=10).length;
+}
+
 function openAddItem(){$('itemForm').reset();$('editIndex').value='';$('formTitle').textContent='Add inventory item';$('itemModal').classList.add('show')}
-$('addItemBtn').onclick=()=>{if(!isAdmin){pendingAdd=true;$('loginModal').classList.add('show');return}openAddItem()};
 function closeItem(){$('itemModal').classList.remove('show')}
 function editItem(i){if(!isAdmin)return;let x=items[i];['code','name','category','qty','unit','price'].forEach(k=>$(k).value=x[k]);$('editIndex').value=i;$('formTitle').textContent='Edit inventory item';$('itemModal').classList.add('show')}
-$('itemForm').onsubmit=e=>{e.preventDefault();if(!isAdmin)return;let x={code:$('code').value.trim(),name:$('name').value.trim(),category:$('category').value,qty:Number($('qty').value),unit:$('unit').value.trim(),price:Number($('price').value)},i=$('editIndex').value;if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){alert('Item code already exists.');return}if(i==='')items.push(x);else items[Number(i)]=x;save();closeItem()};
-function deleteItem(i){if(isAdmin&&confirm('Delete '+items[i].name+'?')){items.splice(i,1);save()}}
-function releaseItem(i){if(!isAdmin)return;let n=Number(prompt('Quantity to release ('+items[i].unit+'):'));if(!Number.isInteger(n)||n<=0)return;if(n>items[i].qty){alert('Not enough stock available.');return}items[i].qty-=n;save()}
-$('search').oninput=render;$('categoryFilter').onchange=render;render();
+function deleteItem(i){if(isAdmin&&confirm('Delete '+items[i].name+'?')){const d=items.splice(i,1)[0];addLog(`Deleted inventory item ${d.name}`);saveAll();toast('Item deleted')}}
+function releaseItem(i){if(!isAdmin)return;let n=Number(prompt('Quantity to release ('+items[i].unit+'):'));if(!Number.isInteger(n)||n<=0)return;if(n>items[i].qty){alert('Not enough stock available.');return}items[i].qty-=n;addLog(`Released ${n} ${items[i].unit} of ${items[i].name}`);saveAll();toast('Stock released')}
+
+/* TAX & REPORTS MODALS */
+function openTaxModal(tab){
+ $('infoModal').classList.add('show');
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ if(tab==='calendar'){
+  $('infoTitle').textContent='Tax Compliance Calendar';
+  $('infoSubtitle').textContent='Upcoming statutory deadlines for '+$('orgType').value;
+  $('infoBody').innerHTML=`
+   <div class="report-row"><span>Monthly Withholding Tax Remittance</span><b>10th of following month</b></div>
+   <div class="report-row"><span>Quarterly VAT / Percentage Tax Return</span><b>25th after quarter-end</b></div>
+   <div class="report-row"><span>Quarterly Income Tax Return</span><b>60 days after quarter-end</b></div>
+   <div class="report-row"><span>Annual Registration & Books Renewal</span><b>January 31</b></div>
+  `;
+ }else if(tab==='records'){
+  const outVat=rev*0.12,inVat=exp*0.12,vatPayable=Math.max(0,outVat-inVat);
+  $('infoTitle').textContent='Tax Records & VAT Summary';
+  $('infoSubtitle').textContent='Estimated 12% VAT computation based on recorded entries';
+  $('infoBody').innerHTML=`
+   <div class="report-row"><span>Gross Taxable Revenue</span><b>${fmt(rev)}</b></div>
+   <div class="report-row"><span>Estimated Output VAT (12%)</span><b>${fmt(outVat)}</b></div>
+   <div class="report-row"><span>Less: Estimated Input VAT (12%)</span><b>${fmt(inVat)}</b></div>
+   <div class="report-row total"><span>Estimated Net VAT Payable</span><span>${fmt(vatPayable)}</span></div>
+  `;
+ }else{
+  $('infoTitle').textContent='Tax Filing Checklist';
+  $('infoSubtitle').textContent='Click items to mark your preparation progress';
+  $('infoBody').innerHTML=checklist.map((c,i)=>`
+   <label class="check-item"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck(${i})"> <span>${esc(c.text)}</span></label>
+  `).join('');
+ }
+}
+
+function toggleCheck(i){checklist[i].done=!checklist[i].done;saveAll()}
+
+function openReportModal(type){
+ $('infoModal').classList.add('show');
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const net=rev-exp;
+ const invVal=items.reduce((s,x)=>s+(x.qty*x.price),0);
+
+ if(type==='income'){
+  $('infoTitle').textContent='Income Statement';
+  $('infoSubtitle').textContent=$('orgType').value+' · Current Period';
+  $('infoBody').innerHTML=`
+   <div class="report-row"><span>Total Operating Revenue</span><b>${fmt(rev)}</b></div>
+   <div class="report-row"><span>Total Operating Expenses</span><b>(${fmt(exp)})</b></div>
+   <div class="report-row total"><span>Net Income</span><span>${fmt(net)}</span></div>
+  `;
+ }else if(type==='balance'){
+  const totalAssets=net+invVal;
+  $('infoTitle').textContent='Balance Sheet';
+  $('infoSubtitle').textContent='As of '+new Date().toLocaleDateString();
+  $('infoBody').innerHTML=`
+   <div class="report-row"><span>Cash on Hand & in Bank</span><b>${fmt(net)}</b></div>
+   <div class="report-row"><span>Merchandise & Supplies Inventory</span><b>${fmt(invVal)}</b></div>
+   <div class="report-row total"><span>Total Assets</span><span>${fmt(totalAssets)}</span></div>
+   <div class="report-row" style="margin-top:10px"><span>Total Liabilities</span><b>₱0.00</b></div>
+   <div class="report-row total"><span>Owner's / Organization Equity</span><span>${fmt(totalAssets)}</span></div>
+  `;
+ }else{
+  $('infoTitle').textContent='Cash Flow Statement';
+  $('infoSubtitle').textContent='Direct Operating Cash Flows';
+  $('infoBody').innerHTML=`
+   <div class="report-row"><span>Cash Inflows from Customers</span><b>${fmt(rev)}</b></div>
+   <div class="report-row"><span>Cash Paid for Expenses & Supplies</span><b>(${fmt(exp)})</b></div>
+   <div class="report-row total"><span>Net Cash Provided by Operations</span><span>${fmt(net)}</span></div>
+  `;
+ }
+}
+
+function closeInfoModal(){$('infoModal').classList.remove('show')}
+
+function exportCSVReport(){
+ const lines=[['Date','Description','Account','Type','Amount','Status']];
+ transactions.forEach(t=>lines.push([t.date,`"${t.desc.replace(/"/g,'""')}"`,`"${t.account}"`,t.type,t.amount,t.status]));
+ const blob=new Blob([lines.map(r=>r.join(',')).join('\n')],{type:'text/csv'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='FinEase_Financial_Report.csv';a.click();
+ addLog('Exported CSV financial report');
+ toast('CSV Report downloaded');
+}
+
+/* AI ASSISTANT */
+function askAI(promptText){
+ const box=$('chatBox');
+ if(!box)return;
+ box.innerHTML+=`<div class="msg user">${esc(promptText)}</div>`;
+ const q=promptText.toLowerCase();
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const net=rev-exp;
+ const lowItems=items.filter(x=>x.qty<=10);
+
+ let reply='';
+ if(q.includes('health')||q.includes('margin')||q.includes('summar')){
+  const margin=rev?((net/rev)*100).toFixed(1):0;
+  reply=`Your total revenue is <b>${fmt(rev)}</b> and expenses are <b>${fmt(exp)}</b>, leaving a net income of <b>${fmt(net)}</b> (${margin}% profit margin).`;
+ }else if(q.includes('inventory')||q.includes('stock')){
+  reply=lowItems.length
+   ? `Attention needed: <b>${lowItems.map(i=>`${i.name} (${i.qty} ${i.unit})`).join(', ')}</b> are at or below 10 units.`
+   : `All ${items.length} inventory items are well-stocked above the 10-unit threshold.`;
+ }else if(q.includes('tax')||q.includes('vat')){
+  reply=`Based on ${fmt(rev)} in revenue and ${fmt(exp)} in expenses, your estimated 12% Output VAT is <b>${fmt(rev*0.12)}</b> and Input VAT is <b>${fmt(exp*0.12)}</b>.`;
+ }else if(q.includes('ledger')||q.includes('post')){
+  reply=`Every <b>Income</b> entry automatically debits <i>Cash</i> and credits your chosen revenue account. Every <b>Expense</b> entry debits the expense account and credits <i>Cash</i>.`;
+ }else{
+  reply=`You currently have <b>${transactions.length} transactions</b> totaling <b>${fmt(net)}</b> in net cash balance and <b>${items.length} inventory items</b> tracked.`;
+ }
+ box.innerHTML+=`<div class="msg ai">${reply}</div>`;
+ box.scrollTop=box.scrollHeight;
+}
+
+/* SECURITY, BACKUP & NAVIGATION */
+function renderLogs(){
+ if($('auditLogs'))$('auditLogs').innerHTML=logs.map(l=>`<div class="report-row"><span>${esc(l.msg)}</span><small style="color:var(--muted)">${esc(l.time)}</small></div>`).join('');
+}
+
+function downloadBackup(){
+ const payload={org:$('orgType').value,exportedAt:new Date().toISOString(),transactions,items};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='FinEase_Backup.json';a.click();
+ addLog('Downloaded full JSON system backup');
+ toast('Backup downloaded');
+}
+
+function resetDemoData(){
+ if(!confirm('Reset all transactions and inventory back to default demo records?'))return;
+ items=structuredClone(starterItems);
+ transactions=structuredClone(starterTx);
+ checklist=structuredClone(starterChecklist);
+ addLog('Reset workspace to default demo data');
+ saveAll();
+ toast('Demo data restored');
+}
+
+function showPage(id){
+ document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateAdmin(){
+ if(!$('adminState'))return;
+ $('adminState').textContent=isAdmin?'Administrator mode':'View mode';
+ $('adminBtn').textContent=isAdmin?'Sign out':'Admin login';
+ if($('inventoryMode'))$('inventoryMode').textContent=isAdmin?'You can manage inventory':'Admin access required to edit';
+ if($('secRoleText'))$('secRoleText').textContent=isAdmin?'Administrator mode':'View mode';
+ renderInventory();
+}
+
+/* EVENT BINDINGS & INITIALIZATION */
+document.addEventListener('DOMContentLoaded', () => {
+ // Navigation sidebar buttons
+ document.querySelectorAll('.nav button').forEach(b => {
+  b.onclick = () => showPage(b.dataset.page);
+ });
+
+ // Header & Dashboard action buttons
+ if($('adminBtn')) {
+  $('adminBtn').onclick = () => {
+   if(isAdmin) {
+    isAdmin = false;
+    updateAdmin();
+    addLog('Signed out of Administrator mode');
+   } else {
+    $('loginModal').classList.add('show');
+   }
+  };
+ }
+
+ if($('dashNewTxBtn')) $('dashNewTxBtn').onclick = openAddTx;
+ if($('txNewBtn')) $('txNewBtn').onclick = openAddTx;
+ if($('dashViewAllTx')) $('dashViewAllTx').onclick = () => showPage('transactions');
+ if($('ledgerPostBtn')) $('ledgerPostBtn').onclick = openAddTx;
+
+ // Inventory Add button
+ if($('addItemBtn')) {
+  $('addItemBtn').onclick = () => {
+   if(!isAdmin) {
+    pendingAdd = true;
+    $('loginModal').classList.add('show');
+    return;
+   }
+   openAddItem();
+  };
+ }
+
+ // Tax Center buttons & cards
+ if($('taxChecklistBtn')) $('taxChecklistBtn').onclick = () => openTaxModal('checklist');
+ if($('taxCalendarCard')) $('taxCalendarCard').onclick = () => openTaxModal('calendar');
+ if($('taxRecordsCard')) $('taxRecordsCard').onclick = () => openTaxModal('records');
+ if($('taxTasksCard')) $('taxTasksCard').onclick = () => openTaxModal('checklist');
+
+ // Report buttons & cards
+ if($('exportCsvBtn')) $('exportCsvBtn').onclick = exportCSVReport;
+ if($('repIncomeCard')) $('repIncomeCard').onclick = () => openReportModal('income');
+ if($('repBalanceCard')) $('repBalanceCard').onclick = () => openReportModal('balance');
+ if($('repCashflowCard')) $('repCashflowCard').onclick = () => openReportModal('cashflow');
+
+ // Security & Backup buttons
+ if($('secDownloadBtn')) $('secDownloadBtn').onclick = downloadBackup;
+ if($('secExportCard')) $('secExportCard').onclick = downloadBackup;
+ if($('secRoleCard')) $('secRoleCard').onclick = () => $('adminBtn').click();
+ if($('secResetCard')) $('secResetCard').onclick = resetDemoData;
+
+ // Modals Close / Cancel buttons
+ if($('loginCancelBtn')) $('loginCancelBtn').onclick = () => $('loginModal').classList.remove('show');
+ if($('loginSubmitBtn')) {
+  $('loginSubmitBtn').onclick = () => {
+   if($('username').value==='admin'&&$('password').value==='finEaseDemo2026'){
+    isAdmin=true;
+    $('loginModal').classList.remove('show');
+    updateAdmin();
+    addLog('Signed in as Administrator');
+    toast('Administrator mode active');
+    if(pendingAdd){pendingAdd=false;openAddItem();}
+   }else alert('Incorrect demo login. Use admin / finEaseDemo2026');
+  };
+ }
+
+ if($('txCancelBtn')) $('txCancelBtn').onclick = closeTxModal;
+ if($('itemCancelBtn')) $('itemCancelBtn').onclick = closeItem;
+ if($('infoCloseBtn')) $('infoCloseBtn').onclick = closeInfoModal;
+ if($('infoExportCsvBtn')) $('infoExportCsvBtn').onclick = exportCSVReport;
+
+ // Forms submit handlers
+ const txForm = $('txForm');
+ if(txForm) {
+  txForm.onsubmit = e => {
+   e.preventDefault();
+   const entry={
+    date:$('txDate').value,
+    type:$('txType').value,
+    desc:$('txDesc').value.trim(),
+    account:$('txAccount').value,
+    amount:Number($('txAmount').value),
+    status:$('txStatus').value
+   };
+   const idx=$('txEditIndex').value;
+   if(idx===''){
+    transactions.unshift(entry);
+    addLog(`Added ${entry.type.toLowerCase()}: "${entry.desc}" (${fmt(entry.amount)})`);
+    toast('Transaction added & posted to ledger');
+   }else{
+    transactions[Number(idx)]=entry;
+    addLog(`Updated transaction: "${entry.desc}"`);
+    toast('Transaction updated');
+   }
+   saveAll();
+   closeTxModal();
+  };
+ }
+
+ const itemForm = $('itemForm');
+ if(itemForm) {
+  itemForm.onsubmit = e => {
+   e.preventDefault();
+   if(!isAdmin)return;
+   let x={
+    code:$('code').value.trim(),
+    name:$('name').value.trim(),
+    category:$('category').value,
+    qty:Number($('qty').value),
+    unit:$('unit').value.trim(),
+    price:Number($('price').value)
+   };
+   let i=$('editIndex').value;
+   if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){
+    alert('Item code already exists.');
+    return;
+   }
+   if(i===''){
+    items.push(x);
+    addLog(`Added inventory item ${x.code} (${x.name})`);
+   }else{
+    items[Number(i)]=x;
+    addLog(`Updated inventory item ${x.code}`);
+   }
+   saveAll();
+   closeItem();
+   toast('Inventory saved');
+  };
+ }
+
+ const aiForm = $('aiForm');
+ if(aiForm) {
+  aiForm.onsubmit = e => {
+   e.preventDefault();
+   const val=$('aiInput').value.trim();
+   if(!val)return;
+   $('aiInput').value='';
+   askAI(val);
+  };
+ }
+
+ const txTypeSelect = $('txType');
+ if(txTypeSelect) txTypeSelect.onchange = () => syncTxAccounts();
+
+ const orgTypeSelect = $('orgType');
+ if(orgTypeSelect) {
+  orgTypeSelect.onchange = () => {
+   if($('orgSubtitle')) $('orgSubtitle').textContent=`Here's an overview of your ${orgTypeSelect.value} accounting activity.`;
+   addLog(`Switched organization profile to ${orgTypeSelect.value}`);
+  };
+ }
+
+ const searchInput = $('search');
+ if(searchInput) searchInput.oninput = renderInventory;
+
+ const categoryFilter = $('categoryFilter');
+ if(categoryFilter) categoryFilter.onchange = renderInventory;
+
+ const txSearch = $('txSearch');
+ if(txSearch) txSearch.oninput = renderTransactions;
+
+ const txTypeFilter = $('txTypeFilter');
+ if(txTypeFilter) txTypeFilter.onchange = renderTransactions;
+
+ // Initial render
+ renderAll();
+});
 </script>
-</body></html>
+</body>
+</html>
