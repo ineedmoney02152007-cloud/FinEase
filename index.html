@@ -704,155 +704,211 @@ function init(){
   b.onclick=()=>showPage(b.dataset.page);
  });
 
- $('adminBtn').onclick=()=>{
-  if(isAdmin){
-   isAdmin=false;
-   updateAdmin();
-   addLog('Signed out of Administrator mode');
-   toast('Signed out');
-  }else{
-   $('loginModal').classList.add('show');
-  }
- };
-
- $('dashNewTxBtn').onclick=openAddTx;
- $('txNewBtn').onclick=openAddTx;
- $('dashViewAllTx').onclick=()=>showPage('transactions');
- $('ledgerPostBtn').onclick=openAddTx;
-
- $('addItemBtn').onclick=()=>{
-  if(!isAdmin){pendingAdd=true;$('loginModal').classList.add('show');return;}
-  openAddItem();
- };
-
- $('taxChecklistBtn').onclick=()=>openTaxModal('checklist');
- $('taxCalendarCard').onclick=()=>openTaxModal('calendar');
- $('taxRecordsCard').onclick=()=>openTaxModal('records');
- $('taxTasksCard').onclick=()=>openTaxModal('checklist');
- $('exportTaxBtn').onclick=exportTaxReport;
-
- $('exportCsvBtn').onclick=exportCSVReport;
- $('exportPrintReportBtn').onclick=exportPrintableStatement;
- $('repIncomeCard').onclick=()=>openReportModal('income');
- $('repBalanceCard').onclick=()=>openReportModal('balance');
- $('repCashflowCard').onclick=()=>openReportModal('cashflow');
-
- $('secDownloadBtn').onclick=downloadBackup;
- $('secExportCard').onclick=downloadBackup;
- $('secRoleCard').onclick=()=>$('adminBtn').click();
- $('secResetCard').onclick=resetDemoData;
-
- $('secRestoreBtn').onclick=()=>$('restoreFileInput').click();
- $('restoreFileInput').onchange=e=>{
-  const file=e.target.files[0];
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-   try{
-    const data=JSON.parse(ev.target.result);
-    if(Array.isArray(data.transactions))transactions=data.transactions;
-    if(Array.isArray(data.items))items=data.items;
-    if(Array.isArray(data.checklist))checklist=data.checklist;
-    saveAll();
-    addLog('Restored data from backup file: '+file.name);
-    toast('Backup restored successfully');
-   }catch(err){alert('Invalid backup JSON file.');}
+ const adminBtn = $('adminBtn');
+ if(adminBtn) {
+  adminBtn.onclick=()=>{
+   if(isAdmin){
+    isAdmin=false;
+    updateAdmin();
+    addLog('Signed out of Administrator mode');
+    toast('Signed out');
+   }else{
+    const loginModal = $('loginModal');
+    if(loginModal) loginModal.classList.add('show');
+   }
   };
-  reader.readAsText(file);
-  e.target.value='';
- };
+ }
 
- $('loginCancelBtn').onclick=()=>$('loginModal').classList.remove('show');
- $('loginSubmitBtn').onclick=()=>{
-  if($('username').value==='admin'&&$('password').value==='finEaseDemo2026'){
-   isAdmin=true;
-   $('loginModal').classList.remove('show');
-   updateAdmin();
-   addLog('Signed in as Administrator');
-   toast('Administrator mode active');
-   if(pendingAdd){pendingAdd=false;openAddItem();}
-  }else alert('Incorrect demo login. Use admin / finEaseDemo2026');
- };
+ if($('dashNewTxBtn')) $('dashNewTxBtn').onclick=openAddTx;
+ if($('txNewBtn')) $('txNewBtn').onclick=openAddTx;
+ if($('dashViewAllTx')) $('dashViewAllTx').onclick=()=>showPage('transactions');
+ if($('ledgerPostBtn')) $('ledgerPostBtn').onclick=openAddTx;
 
- $('txCancelBtn').onclick=closeTxModal;
- $('itemCancelBtn').onclick=closeItem;
- $('infoCloseBtn').onclick=closeInfoModal;
- $('infoExportCsvBtn').onclick=exportCSVReport;
- $('infoExportStatementBtn').onclick=exportPrintableStatement;
-
- $('txForm').onsubmit=e=>{
-  e.preventDefault();
-  const entry={
-   date:$('txDate').value,
-   type:$('txType').value,
-   desc:$('txDesc').value.trim(),
-   account:$('txAccount').value,
-   amount:Number($('txAmount').value),
-   status:$('txStatus').value
+ const addItemBtn = $('addItemBtn');
+ if(addItemBtn) {
+  addItemBtn.onclick=()=>{
+   if(!isAdmin){
+    pendingAdd=true;
+    const loginModal = $('loginModal');
+    if(loginModal) loginModal.classList.add('show');
+    return;
+   }
+   openAddItem();
   };
-  const idx=$('txEditIndex').value;
-  if(idx===''){
-   transactions.unshift(entry);
-   addLog(`Added ${entry.type.toLowerCase()}: "${entry.desc}" (${fmt(entry.amount)})`);
-   toast('Transaction added & posted to ledger');
-  }else{
-   transactions[Number(idx)]=entry;
-   addLog(`Updated transaction: "${entry.desc}"`);
-   toast('Transaction updated');
-  }
-  saveAll();
-  closeTxModal();
- };
+ }
 
- $('itemForm').onsubmit=e=>{
-  e.preventDefault();
-  if(!isAdmin)return;
-  let x={
-   code:$('code').value.trim(),
-   name:$('name').value.trim(),
-   category:$('category').value,
-   qty:Number($('qty').value),
-   unit:$('unit').value.trim(),
-   price:Number($('price').value)
+ if($('taxChecklistBtn')) $('taxChecklistBtn').onclick=()=>openTaxModal('checklist');
+ if($('taxCalendarCard')) $('taxCalendarCard').onclick=()=>openTaxModal('calendar');
+ if($('taxRecordsCard')) $('taxRecordsCard').onclick=()=>openTaxModal('records');
+ if($('taxTasksCard')) $('taxTasksCard').onclick=()=>openTaxModal('checklist');
+ if($('exportTaxBtn')) $('exportTaxBtn').onclick=exportTaxReport;
+
+ if($('exportCsvBtn')) $('exportCsvBtn').onclick=exportCSVReport;
+ if($('exportPrintReportBtn')) $('exportPrintReportBtn').onclick=exportPrintableStatement;
+ if($('repIncomeCard')) $('repIncomeCard').onclick=()=>openReportModal('income');
+ if($('repBalanceCard')) $('repBalanceCard').onclick=()=>openReportModal('balance');
+ if($('repCashflowCard')) $('repCashflowCard').onclick=()=>openReportModal('cashflow');
+
+ if($('secDownloadBtn')) $('secDownloadBtn').onclick=downloadBackup;
+ if($('secExportCard')) $('secExportCard').onclick=downloadBackup;
+ if($('secRoleCard')) $('secRoleCard').onclick=()=> { if(adminBtn) adminBtn.click(); };
+ if($('secResetCard')) $('secResetCard').onclick=resetDemoData;
+
+ const secRestoreBtn = $('secRestoreBtn');
+ const restoreFileInput = $('restoreFileInput');
+ if(secRestoreBtn && restoreFileInput) {
+  secRestoreBtn.onclick=()=>restoreFileInput.click();
+  restoreFileInput.onchange=e=>{
+   const file=e.target.files[0];
+   if(!file)return;
+   const reader=new FileReader();
+   reader.onload=ev=>{
+    try{
+     const data=JSON.parse(ev.target.result);
+     if(Array.isArray(data.transactions))transactions=data.transactions;
+     if(Array.isArray(data.items))items=data.items;
+     if(Array.isArray(data.checklist))checklist=data.checklist;
+     saveAll();
+     addLog('Restored data from backup file: '+file.name);
+     toast('Backup restored successfully');
+    }catch(err){alert('Invalid backup JSON file.');}
+   };
+   reader.readAsText(file);
+   e.target.value='';
   };
-  let i=$('editIndex').value;
-  if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){
-   alert('Item code already exists.');
-   return;
-  }
-  if(i===''){
-   items.push(x);
-   addLog(`Added inventory item ${x.code} (${x.name})`);
-  }else{
-   items[Number(i)]=x;
-   addLog(`Updated inventory item ${x.code}`);
-  }
-  saveAll();
-  closeItem();
-  toast('Inventory saved');
- };
+ }
+
+ const loginCancelBtn = $('loginCancelBtn');
+ if(loginCancelBtn) {
+  loginCancelBtn.onclick=()=>{
+   const loginModal = $('loginModal');
+   if(loginModal) loginModal.classList.remove('show');
+  };
+ }
+
+ const loginSubmitBtn = $('loginSubmitBtn');
+ if(loginSubmitBtn) {
+  loginSubmitBtn.onclick=()=>{
+   const usernameEl = $('username');
+   const passwordEl = $('password');
+   if(usernameEl && passwordEl && usernameEl.value==='admin'&&passwordEl.value==='finEaseDemo2026'){
+    isAdmin=true;
+    const loginModal = $('loginModal');
+    if(loginModal) loginModal.classList.remove('show');
+    updateAdmin();
+    addLog('Signed in as Administrator');
+    toast('Administrator mode active');
+    if(pendingAdd){pendingAdd=false;openAddItem();}
+   }else{
+    alert('Incorrect demo login. Use admin / finEaseDemo2026');
+   }
+  };
+ }
+
+ if($('txCancelBtn')) $('txCancelBtn').onclick=closeTxModal;
+ if($('itemCancelBtn')) $('itemCancelBtn').onclick=closeItem;
+ if($('infoCloseBtn')) $('infoCloseBtn').onclick=closeInfoModal;
+ if($('infoExportCsvBtn')) $('infoExportCsvBtn').onclick=exportCSVReport;
+ if($('infoExportStatementBtn')) $('infoExportStatementBtn').onclick=exportPrintableStatement;
+
+ const txForm = $('txForm');
+ if(txForm) {
+  txForm.onsubmit=e=>{
+   e.preventDefault();
+   const entry={
+    date:$('txDate').value,
+    type:$('txType').value,
+    desc:$('txDesc').value.trim(),
+    account:$('txAccount').value,
+    amount:Number($('txAmount').value),
+    status:$('txStatus').value
+   };
+   const idx=$('txEditIndex').value;
+   if(idx===''){
+    transactions.unshift(entry);
+    addLog(`Added ${entry.type.toLowerCase()}: "${entry.desc}" (${fmt(entry.amount)})`);
+    toast('Transaction added & posted to ledger');
+   }else{
+    transactions[Number(idx)]=entry;
+    addLog(`Updated transaction: "${entry.desc}"`);
+    toast('Transaction updated');
+   }
+   saveAll();
+   closeTxModal();
+  };
+ }
+
+ const itemForm = $('itemForm');
+ if(itemForm) {
+  itemForm.onsubmit=e=>{
+   e.preventDefault();
+   if(!isAdmin)return;
+   let x={
+    code:$('code').value.trim(),
+    name:$('name').value.trim(),
+    category:$('category').value,
+    qty:Number($('qty').value),
+    unit:$('unit').value.trim(),
+    price:Number($('price').value)
+   };
+   let i=$('editIndex').value;
+   if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){
+    alert('Item code already exists.');
+    return;
+   }
+   if(i===''){
+    items.push(x);
+    addLog(`Added inventory item ${x.code} (${x.name})`);
+   }else{
+    items[Number(i)]=x;
+    addLog(`Updated inventory item ${x.code}`);
+   }
+   saveAll();
+   closeItem();
+   toast('Inventory saved');
+  };
+ }
 
  document.querySelectorAll('#aiChips .chip-btn').forEach(btn=>{
   btn.onclick=()=>askAI(btn.dataset.q);
  });
 
- $('aiForm').onsubmit=e=>{
-  e.preventDefault();
-  const val=$('aiInput').value.trim();
-  if(!val)return;
-  $('aiInput').value='';
-  askAI(val);
- };
+ const aiForm = $('aiForm');
+ if(aiForm) {
+  aiForm.onsubmit=e=>{
+   e.preventDefault();
+   const aiInput = $('aiInput');
+   if(!aiInput)return;
+   const val=aiInput.value.trim();
+   if(!val)return;
+   aiInput.value='';
+   askAI(val);
+  };
+ }
 
- $('txType').onchange=()=>syncTxAccounts();
- $('orgType').onchange=()=>{
-  $('orgSubtitle').textContent=`Here's an overview of your ${$('orgType').value} accounting activity.`;
-  addLog(`Switched organization profile to ${$('orgType').value}`);
- };
- $('search').oninput=renderInventory;
- $('categoryFilter').onchange=renderInventory;
- $('txSearch').oninput=renderTransactions;
- $('txTypeFilter').onchange=renderTransactions;
+ const txType = $('txType');
+ if(txType) txType.onchange=()=>syncTxAccounts();
+
+ const orgType = $('orgType');
+ if(orgType) {
+  orgType.onchange=()=>{
+   const orgSubtitle = $('orgSubtitle');
+   if(orgSubtitle) orgSubtitle.textContent=`Here's an overview of your ${orgType.value} accounting activity.`;
+   addLog(`Switched organization profile to ${orgType.value}`);
+  };
+ }
+
+ const search = $('search');
+ if(search) search.oninput=renderInventory;
+
+ const categoryFilter = $('categoryFilter');
+ if(categoryFilter) categoryFilter.onchange=renderInventory;
+
+ const txSearch = $('txSearch');
+ if(txSearch) txSearch.oninput=renderTransactions;
+
+ const txTypeFilter = $('txTypeFilter');
+ if(txTypeFilter) txTypeFilter.onchange=renderTransactions;
 
  renderAll();
 }
@@ -862,6 +918,7 @@ if(document.readyState==='loading'){
 }else{
  init();
 }
+})();
 </script>
 </body>
 </html>
