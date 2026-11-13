@@ -50,7 +50,7 @@ tbody tr:last-child td{border:0}
 .field label{font-size:11px;font-weight:700;color:#657186}
 .field input,.field select,.field textarea{padding:11px;border:1px solid var(--line);border-radius:8px;outline:none}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}
-.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;flex-wrap:wrap}
 .login-chip{font-size:11px;color:var(--muted)}
 .chat-box{background:#f8faff;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
 .msg{padding:10px 14px;border-radius:11px;font-size:13px;line-height:1.55;max-width:88%}
@@ -64,6 +64,8 @@ tbody tr:last-child td{border:0}
 .report-row.total{font-weight:800;color:var(--navy);border-top:2px solid var(--line);border-bottom:0;padding-top:12px;margin-top:4px}
 .toast{position:fixed;bottom:20px;right:20px;background:var(--navy);color:white;padding:11px 16px;border-radius:10px;font-size:12px;font-weight:600;box-shadow:0 10px 30px #0003;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.show{opacity:1}
+@media(max-width:950px){.sidebar{width:205px}.content{padding:24px 20px}.topbar{padding:0 20px}.stats{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.app{display:block}.sidebar{width:100%;padding:12px;display:block}.brand{padding:3px 8px 12px}.tag,.side-bottom{display:none}.nav{flex-direction:row;overflow-x:auto}.nav button{white-space:nowrap;padding:9px 11px;font-size:11px}.topbar{height:auto;padding:12px 15px}.org{gap:5px}.org label{display:none}.org select{max-width:155px}.content{padding:20px 13px}.heading h1{font-size:21px}.stats{gap:9px}.card{padding:15px}.stat-value{font-size:21px}.info-grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -72,26 +74,26 @@ tbody tr:last-child td{border:0}
  <div class="brand">Fin<span>Ease</span></div>
  <div class="tag">ACCOUNTING PLATFORM</div>
  <nav class="nav" id="sidebarNav">
-  <button class="active" data-page="dashboard"><span class="ico">▦</span> Dashboard</button>
-  <button data-page="transactions"><span class="ico">⇄</span> Transactions</button>
-  <button data-page="ledger"><span class="ico">▤</span> General Ledger</button>
-  <button data-page="inventory"><span class="ico">▣</span> Inventory</button>
-  <button data-page="tax"><span class="ico">％</span> Tax Center</button>
-  <button data-page="reports"><span class="ico">▥</span> Reports</button>
-  <button data-page="assistant"><span class="ico">✧</span> AI Assistant</button>
-  <button data-page="security"><span class="ico">♢</span> Security & Backup</button>
+  <button type="button" class="active" data-page="dashboard"><span class="ico">▦</span> Dashboard</button>
+  <button type="button" data-page="transactions"><span class="ico">⇄</span> Transactions</button>
+  <button type="button" data-page="ledger"><span class="ico">▤</span> General Ledger</button>
+  <button type="button" data-page="inventory"><span class="ico">▣</span> Inventory</button>
+  <button type="button" data-page="tax"><span class="ico">％</span> Tax Center</button>
+  <button type="button" data-page="reports"><span class="ico">▥</span> Reports</button>
+  <button type="button" data-page="assistant"><span class="ico">✧</span> AI Assistant</button>
+  <button type="button" data-page="security"><span class="ico">♢</span> Security & Backup</button>
  </nav>
  <div class="side-bottom">FinEase Universal Accounting<br>Making accounting easier, smarter, and faster.</div>
 </aside>
 <div class="main">
  <header class="topbar">
   <div class="org"><label>Organization</label><select id="orgType"><option>Private Business</option><option>Corporation</option><option>Government Office / LGU</option><option>Accounting Firm</option></select></div>
-  <div class="topright"><span class="login-chip" id="adminState">View mode</span><button class="plain" id="adminBtn">Admin login</button><div class="avatar">FE</div></div>
+  <div class="topright"><span class="login-chip" id="adminState">View mode</span><button type="button" class="plain" id="adminBtn">Admin login</button><div class="avatar">FE</div></div>
  </header>
  <main class="content">
   <!-- DASHBOARD -->
   <section class="section active" id="dashboard">
-   <div class="heading"><div><h1>Good day! Welcome to FinEase.</h1><p id="orgSubtitle">Here's an overview of your Private Business accounting activity.</p></div><button class="primary" id="dashNewTxBtn">＋ New transaction</button></div>
+   <div class="heading"><div><h1>Good day! Welcome to FinEase.</h1><p id="orgSubtitle">Here's an overview of your Private Business accounting activity.</p></div><button type="button" class="primary" id="dashNewTxBtn">＋ New transaction</button></div>
    <div class="grid stats">
     <div class="card"><div class="stat-top">Total Revenue <span class="stat-icon">₱</span></div><div class="stat-value" id="dashRev">₱0.00</div><div class="stat-foot"><span class="up">Live</span> recorded income</div></div>
     <div class="card"><div class="stat-top">Total Expenses <span class="stat-icon">↗</span></div><div class="stat-value" id="dashExp">₱0.00</div><div class="stat-foot">Recorded operating expenses</div></div>
@@ -99,7 +101,7 @@ tbody tr:last-child td{border:0}
     <div class="card"><div class="stat-top">Inventory Items <span class="stat-icon">▣</span></div><div class="stat-value" id="dashCount">4</div><div class="stat-foot"><span id="dashLow">1</span> item(s) need attention</div></div>
    </div>
    <div class="grid dashboard-grid">
-    <div class="card"><div class="card-title"><h3>Recent Transactions</h3><button class="soft" id="dashViewAllTx">View all</button></div>
+    <div class="card"><div class="card-title"><h3>Recent Transactions</h3><button type="button" class="soft" id="dashViewAllTx">View all</button></div>
      <div id="recentTxList"></div>
     </div>
     <div class="card"><div class="card-title"><h3>Financial Snapshot</h3><small>Auto-synced</small></div>
@@ -116,7 +118,7 @@ tbody tr:last-child td{border:0}
 
   <!-- TRANSACTIONS -->
   <section class="section" id="transactions">
-   <div class="heading"><div><h1>Transactions</h1><p>Record and organize your organization's financial activities.</p></div><button class="primary" id="txNewBtn">＋ Add transaction</button></div>
+   <div class="heading"><div><h1>Transactions</h1><p>Record and organize your organization's financial activities.</p></div><button type="button" class="primary" id="txNewBtn">＋ Add transaction</button></div>
    <div class="toolbar">
     <div class="toolbar-left">
      <input class="search" id="txSearch" placeholder="Search description or account...">
@@ -129,7 +131,7 @@ tbody tr:last-child td{border:0}
 
   <!-- GENERAL LEDGER -->
   <section class="section" id="ledger">
-   <div class="heading"><div><h1>General Ledger</h1><p>Automatically posted double-entry balances grouped by account.</p></div><button class="plain" id="ledgerPostBtn">＋ Post journal entry</button></div>
+   <div class="heading"><div><h1>General Ledger</h1><p>Automatically posted double-entry balances grouped by account.</p></div><button type="button" class="plain" id="ledgerPostBtn">＋ Post journal entry</button></div>
    <div class="card table-card"><div class="tablewrap"><table><thead><tr><th>Account</th><th>Category</th><th>Total Debit</th><th>Total Credit</th><th>Ending Balance</th></tr></thead><tbody id="ledgerRows"></tbody></table></div></div>
   </section>
 
@@ -142,21 +144,33 @@ tbody tr:last-child td{border:0}
 
   <!-- TAX CENTER -->
   <section class="section" id="tax">
-   <div class="heading"><div><h1>Tax Center</h1><p>Keep tax records, VAT estimates, and important filing dates organized.</p></div><button class="soft" id="taxChecklistBtn">Open Filing Checklist</button></div>
+   <div class="heading">
+    <div><h1>Tax Center</h1><p>Keep tax records, VAT estimates, and important filing dates organized.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+     <button type="button" class="soft" id="taxChecklistBtn">Filing Checklist</button>
+     <button type="button" class="primary" id="exportTaxBtn">Export Tax Report ↓</button>
+    </div>
+   </div>
    <div class="grid info-grid">
     <div class="card feature" id="taxCalendarCard"><div><div class="ficon">🗓️</div><h3>Tax Calendar</h3><p>Monitor upcoming BIR / local tax deadlines and compliance reminders.</p></div><span class="badge blue" style="align-self:flex-start">View Deadlines →</span></div>
-    <div class="card feature" id="taxRecordsCard"><div><div class="ficon">🧾</div><h3>Tax Records & VAT</h3><p>View estimated 12% output/input VAT and taxable transaction summaries.</p></div><span class="badge good" style="align-self:flex-start">View Tax Summary →</span></div>
+    <div class="card feature" id="taxRecordsCard"><div><div class="ficon">🧾</div><h3>Tax Records & VAT</h3><p>View estimated 12% output/input VAT and taxable transaction summaries.</p></div><span class="badge good" style="align-self:flex-start">View & Export VAT →</span></div>
     <div class="card feature" id="taxTasksCard"><div><div class="ficon">✓</div><h3>Filing Checklist</h3><p>Track the documents and steps needed for periodic tax preparation.</p></div><span class="badge low" style="align-self:flex-start">Manage Tasks →</span></div>
    </div>
   </section>
 
   <!-- REPORTS -->
   <section class="section" id="reports">
-   <div class="heading"><div><h1>Financial Reports</h1><p>Review live generated statements for better financial decision-making.</p></div><button class="primary" id="exportCsvBtn">Export CSV report ↓</button></div>
+   <div class="heading">
+    <div><h1>Financial Reports</h1><p>Review and export live generated statements for better decision-making.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+     <button type="button" class="soft" id="exportPrintReportBtn">Export Printable Statement ↓</button>
+     <button type="button" class="primary" id="exportCsvBtn">Export CSV Ledger ↓</button>
+    </div>
+   </div>
    <div class="grid info-grid">
-    <div class="card feature" id="repIncomeCard"><div><div class="ficon">📊</div><h3>Income Statement</h3><p>Summarizes revenue, operating expenses, and net income for the current period.</p></div><span class="badge blue" style="align-self:flex-start">Generate Statement →</span></div>
-    <div class="card feature" id="repBalanceCard"><div><div class="ficon">⚖️</div><h3>Balance Sheet</h3><p>Shows Cash, Inventory Assets, Liabilities, and Owner's Equity.</p></div><span class="badge good" style="align-self:flex-start">Generate Balance Sheet →</span></div>
-    <div class="card feature" id="repCashflowCard"><div><div class="ficon">💧</div><h3>Cash Flow Statement</h3><p>Summarizes cash inflows and outflows from recorded operating activities.</p></div><span class="badge blue" style="align-self:flex-start">Generate Cash Flow →</span></div>
+    <div class="card feature" id="repIncomeCard"><div><div class="ficon">📊</div><h3>Income Statement</h3><p>Summarizes revenue, operating expenses, and net income for the current period.</p></div><span class="badge blue" style="align-self:flex-start">View & Export →</span></div>
+    <div class="card feature" id="repBalanceCard"><div><div class="ficon">⚖️</div><h3>Balance Sheet</h3><p>Shows Cash, Inventory Assets, Liabilities, and Owner's Equity.</p></div><span class="badge good" style="align-self:flex-start">View & Export →</span></div>
+    <div class="card feature" id="repCashflowCard"><div><div class="ficon">💧</div><h3>Cash Flow Statement</h3><p>Summarizes cash inflows and outflows from recorded operating activities.</p></div><span class="badge blue" style="align-self:flex-start">View & Export →</span></div>
    </div>
   </section>
 
@@ -165,18 +179,18 @@ tbody tr:last-child td{border:0}
    <div class="heading"><div><h1>AI Accounting Assistant</h1><p>Analyze your live FinEase ledger, check margins, and verify journal entries.</p></div></div>
    <div class="card" style="max-width:820px">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:24px">✧</span><h3 style="color:var(--navy);margin:0">FinEase Smart Auditor</h3></div>
-    <p style="color:var(--muted);line-height:1.6;margin-top:0">Ask a question or pick a quick audit check below to analyze your current transactions and inventory.</p>
-    <div class="chip-row">
-     <button class="chip-btn" type="button" onclick="askAI('Summarize my financial health')">📊 Summarize financial health</button>
-     <button class="chip-btn" type="button" onclick="askAI('Check inventory alerts')">📦 Check inventory alerts</button>
-     <button class="chip-btn" type="button" onclick="askAI('How are my transactions posted to the ledger?')">📘 Explain ledger posting</button>
-     <button class="chip-btn" type="button" onclick="askAI('Estimate my tax liability')">🧾 Estimate VAT / tax</button>
+    <p style="color:var(--muted);line-height:1.6;margin-top:0">Ask a question or pick a quick audit check below to analyze your current transactions, tax estimates, and inventory.</p>
+    <div class="chip-row" id="aiChips">
+     <button class="chip-btn" type="button" data-q="Summarize my financial health">📊 Summarize financial health</button>
+     <button class="chip-btn" type="button" data-q="Check inventory alerts">📦 Check inventory alerts</button>
+     <button class="chip-btn" type="button" data-q="How are my transactions posted to the ledger?">📘 Explain ledger posting</button>
+     <button class="chip-btn" type="button" data-q="Estimate my tax liability">🧾 Estimate VAT / tax</button>
     </div>
     <div class="chat-box" id="chatBox">
-     <div class="msg ai">Hello! I'm connected to your live FinEase records. Click any prompt above or ask me about your revenue, expenses, ledger balances, or inventory.</div>
+     <div class="msg ai">Hello! I'm connected to your live FinEase records. Click any prompt above or ask me about your revenue, expenses, ledger balances, taxes, or inventory.</div>
     </div>
     <form id="aiForm" style="display:flex;gap:8px">
-     <input class="search" id="aiInput" style="flex:1" placeholder="Ask about your finances..." required>
+     <input class="search" id="aiInput" style="flex:1" placeholder="Ask about your finances, e.g., 'What is my net profit margin?'" required>
      <button class="primary" type="submit">Ask AI</button>
     </form>
    </div>
@@ -184,9 +198,16 @@ tbody tr:last-child td{border:0}
 
   <!-- SECURITY & BACKUP -->
   <section class="section" id="security">
-   <div class="heading"><div><h1>Security & Backup</h1><p>Manage administrator access, backup JSON files, and view audit logs.</p></div><button class="primary" id="secDownloadBtn">Download JSON Backup ↓</button></div>
+   <div class="heading">
+    <div><h1>Security & Backup</h1><p>Manage administrator access, backup/restore JSON files, and view audit logs.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+     <button type="button" class="soft" id="secRestoreBtn">Restore JSON Backup ↑</button>
+     <button type="button" class="primary" id="secDownloadBtn">Download JSON Backup ↓</button>
+     <input type="file" id="restoreFileInput" accept=".json" style="display:none">
+    </div>
+   </div>
    <div class="grid info-grid">
-    <div class="card feature" id="secRoleCard"><div><div class="ficon">🔐</div><h3>Role-Based Access</h3><p>Currently in <b id="secRoleText">View mode</b>. Click to toggle Administrator credentials.</p></div><span class="badge blue" style="align-self:flex-start">Toggle Access →</span></div>
+    <div class="card feature" id="secRoleCard"><div><div class="ficon">🔐</div><h3>Role-Based Access</h3><p>Currently in <b id="secRoleText">View mode</b>. Click to sign in or out of Administrator mode.</p></div><span class="badge blue" style="align-self:flex-start">Toggle Access →</span></div>
     <div class="card feature" id="secExportCard"><div><div class="ficon">🗂️</div><h3>Backup & Restore</h3><p>Export all transactions, ledger data, and inventory to a local backup file.</p></div><span class="badge good" style="align-self:flex-start">Export Data →</span></div>
     <div class="card feature" id="secResetCard"><div><div class="ficon">↺</div><h3>Reset Demo Data</h3><p>Restore default sample transactions and inventory items to start fresh.</p></div><span class="badge low" style="align-self:flex-start">Reset Records →</span></div>
    </div>
@@ -236,7 +257,7 @@ tbody tr:last-child td{border:0}
 <div class="form-modal" id="itemModal"><div class="dialog"><h2 id="formTitle">Add inventory item</h2><p>Enter the item details below.</p><form id="itemForm"><input type="hidden" id="editIndex"><div class="formgrid">
 <div class="field"><label>Item Code</label><input id="code" required placeholder="e.g. SUP-005"></div><div class="field"><label>Item Name</label><input id="name" required placeholder="Item name"></div>
 <div class="field"><label>Category</label><select id="category"><option>Office Supplies</option><option>Equipment</option><option>Merchandise</option><option>Raw Materials</option><option>Other</option></select></div><div class="field"><label>Quantity</label><input id="qty" type="number" min="0" required></div>
-<div class="field"><label>Unit</label><input id="unit" required placeholder="pcs, boxes, reams"></div><div class="field"><label>Unit Price (₱)</label><input id="price" type="number" min="0" step=".01" required></div></div><div class="dialog-actions"><button type="button" class="plain" id="itemCancelBtn">Cancel</button><button class="primary" type="submit">Save Item</button></div></form></div></div>
+<div class="field"><label>Unit</label><input id="unit" required placeholder="pcs, boxes, reams"></div><div class="field"><label>Unit Price (₱)</label><input id="price" type="number" min="0" step=".01" required></div></div><div class="dialog-actions"><button type="button" class="plain" id="itemCancelBtn">Cancel</button><button type="submit" class="primary">Save Item</button></div></form></div></div>
 
 <!-- INFO / REPORT / TAX MODAL -->
 <div class="form-modal" id="infoModal">
@@ -246,6 +267,7 @@ tbody tr:last-child td{border:0}
   <div id="infoBody"></div>
   <div class="dialog-actions">
    <button type="button" class="plain" id="infoCloseBtn">Close</button>
+   <button type="button" class="soft" id="infoExportStatementBtn">Export Statement</button>
    <button type="button" class="primary" id="infoExportCsvBtn">Export CSV</button>
   </div>
  </div>
@@ -254,6 +276,7 @@ tbody tr:last-child td{border:0}
 <div class="toast" id="toast"></div>
 
 <script>
+(function(){
 const starterItems=[
  {code:'SUP-001',name:'Bond Paper',category:'Office Supplies',qty:120,unit:'reams',price:185},
  {code:'SUP-002',name:'Ballpen',category:'Office Supplies',qty:60,unit:'pcs',price:12},
@@ -278,15 +301,15 @@ const starterChecklist=[
 const incomeAccounts=['Service Revenue','Sales Revenue','Consulting Income','Other Income'];
 const expenseAccounts=['Office Supplies Expense','Utilities Expense','Rent Expense','Salaries & Wages','Equipment & Maintenance','Taxes & Licenses'];
 
-let items=JSON.parse(localStorage.getItem('finease_items_universal')||'null')||structuredClone(starterItems);
-let transactions=JSON.parse(localStorage.getItem('finease_tx_universal')||'null')||structuredClone(starterTx);
-let checklist=JSON.parse(localStorage.getItem('finease_tax_checks')||'null')||structuredClone(starterChecklist);
+let items=JSON.parse(localStorage.getItem('finease_items_universal')||'null')||JSON.parse(JSON.stringify(starterItems));
+let transactions=JSON.parse(localStorage.getItem('finease_tx_universal')||'null')||JSON.parse(JSON.stringify(starterTx));
+let checklist=JSON.parse(localStorage.getItem('finease_tax_checks')||'null')||JSON.parse(JSON.stringify(starterChecklist));
 let logs=JSON.parse(localStorage.getItem('finease_logs')||'null')||[{time:'System Init',msg:'FinEase workspace loaded'}];
 
 let isAdmin=false,pendingAdd=false;
 const $=id=>document.getElementById(id);
 const fmt=n=>'₱'+Number(n||0).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;T'}[c]||c))}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]||c))}
 
 function toast(msg){
  const t=$('toast');if(!t)return;
@@ -297,7 +320,7 @@ function toast(msg){
 function addLog(msg){
  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
  logs.unshift({time:now,msg});
- if(logs.length>12)logs.pop();
+ if(logs.length>15)logs.pop();
  localStorage.setItem('finease_logs',JSON.stringify(logs));
  renderLogs();
 }
@@ -307,6 +330,17 @@ function saveAll(){
  localStorage.setItem('finease_tx_universal',JSON.stringify(transactions));
  localStorage.setItem('finease_tax_checks',JSON.stringify(checklist));
  renderAll();
+}
+
+function downloadFile(filename,content,mime){
+ const blob=new Blob([content],{type:mime});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download=filename;
+ document.body.appendChild(a);
+ a.click();
+ document.body.removeChild(a);
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
 function renderAll(){
@@ -346,7 +380,7 @@ function renderFinancials(){
   <div class="activity">
    <span class="dot ${t.type==='Income'?'inc':'exp'}"></span>
    <div><b>${esc(t.desc)}</b><small>${esc(t.date)} · ${esc(t.account)}</small></div>
-   <span class="amount" style="color:${t.type==='Income'?'var(--green)':'var(--navy)'}">${t.type==='Income'?'+':'-'} ${fmt(t.amount)}</span>
+   <span class="amount" style="color:${t.type==='Income'?'var(--green)':'var(--navy)'}">${t.type==='Income'?'+':'−'} ${fmt(t.amount)}</span>
   </div>
  `).join('')||'<p style="color:var(--muted);font-size:12px">No transactions recorded yet.</p>';
 }
@@ -368,7 +402,7 @@ function openAddTx(){
  $('txModal').classList.add('show');
 }
 
-function editTx(i){
+window.editTx=function(i){
  const t=transactions[i];
  $('txEditIndex').value=i;
  $('txDate').value=t.date;
@@ -379,15 +413,15 @@ function editTx(i){
  $('txStatus').value=t.status;
  $('txFormTitle').textContent='Edit Transaction';
  $('txModal').classList.add('show');
-}
+};
 
-function deleteTx(i){
+window.deleteTx=function(i){
  if(!confirm('Delete transaction: '+transactions[i].desc+'?'))return;
  const removed=transactions.splice(i,1)[0];
  addLog(`Deleted transaction "${removed.desc}" (${fmt(removed.amount)})`);
  saveAll();
  toast('Transaction deleted');
-}
+};
 
 function closeTxModal(){$('txModal').classList.remove('show')}
 
@@ -460,11 +494,13 @@ function renderInventory(){
 
 function openAddItem(){$('itemForm').reset();$('editIndex').value='';$('formTitle').textContent='Add inventory item';$('itemModal').classList.add('show')}
 function closeItem(){$('itemModal').classList.remove('show')}
-function editItem(i){if(!isAdmin)return;let x=items[i];['code','name','category','qty','unit','price'].forEach(k=>$(k).value=x[k]);$('editIndex').value=i;$('formTitle').textContent='Edit inventory item';$('itemModal').classList.add('show')}
-function deleteItem(i){if(isAdmin&&confirm('Delete '+items[i].name+'?')){const d=items.splice(i,1)[0];addLog(`Deleted inventory item ${d.name}`);saveAll();toast('Item deleted')}}
-function releaseItem(i){if(!isAdmin)return;let n=Number(prompt('Quantity to release ('+items[i].unit+'):'));if(!Number.isInteger(n)||n<=0)return;if(n>items[i].qty){alert('Not enough stock available.');return}items[i].qty-=n;addLog(`Released ${n} ${items[i].unit} of ${items[i].name}`);saveAll();toast('Stock released')}
+window.editItem=function(i){if(!isAdmin)return;let x=items[i];['code','name','category','qty','unit','price'].forEach(k=>$(k).value=x[k]);$('editIndex').value=i;$('formTitle').textContent='Edit inventory item';$('itemModal').classList.add('show')};
+window.deleteItem=function(i){if(isAdmin&&confirm('Delete '+items[i].name+'?')){const d=items.splice(i,1)[0];addLog(`Deleted inventory item ${d.name}`);saveAll();toast('Item deleted')}};
+window.releaseItem=function(i){if(!isAdmin)return;let n=Number(prompt('Quantity to release ('+items[i].unit+'):'));if(!Number.isInteger(n)||n<=0)return;if(n>items[i].qty){alert('Not enough stock available.');return}items[i].qty-=n;addLog(`Released ${n} ${items[i].unit} of ${items[i].name}`);saveAll();toast('Stock released')};
 
-/* TAX & REPORTS MODALS */
+/* TAX & REPORTS MODALS + EXPORTS */
+window.toggleCheck=function(i){checklist[i].done=!checklist[i].done;saveAll()};
+
 function openTaxModal(tab){
  $('infoModal').classList.add('show');
  const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
@@ -497,7 +533,31 @@ function openTaxModal(tab){
  }
 }
 
-function toggleCheck(i){checklist[i].done=!checklist[i].done;saveAll()}
+function exportTaxReport(){
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const outVat=(rev*0.12).toFixed(2);
+ const inVat=(exp*0.12).toFixed(2);
+ const netVat=Math.max(0,outVat-inVat).toFixed(2);
+
+ const rows=[
+  ['FinEase Tax & VAT Summary Report',$('orgType').value],
+  ['Generated Date',new Date().toLocaleDateString()],
+  [],
+  ['Metric','Amount (PHP)'],
+  ['Gross Taxable Revenue',rev.toFixed(2)],
+  ['Estimated Output VAT (12%)',outVat],
+  ['Deductible Expenses',exp.toFixed(2)],
+  ['Estimated Input VAT (12%)',inVat],
+  ['Estimated Net VAT Payable',netVat],
+  [],
+  ['Filing Checklist Item','Status'],
+  ...checklist.map(c=>[`"${c.text}"`,c.done?'Completed':'Pending'])
+ ];
+ downloadFile('FinEase_Tax_Report.csv',rows.map(r=>r.join(',')).join('\n'),'text/csv');
+ addLog('Exported Tax & VAT Summary CSV');
+ toast('Tax Report exported');
+}
 
 function openReportModal(type){
  $('infoModal').classList.add('show');
@@ -539,12 +599,36 @@ function openReportModal(type){
 function closeInfoModal(){$('infoModal').classList.remove('show')}
 
 function exportCSVReport(){
- const lines=[['Date','Description','Account','Type','Amount','Status']];
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const lines=[
+  ['FinEase Financial Report',$('orgType').value],
+  ['Total Revenue',rev.toFixed(2)],
+  ['Total Expenses',exp.toFixed(2)],
+  ['Net Income',(rev-exp).toFixed(2)],
+  [],
+  ['Date','Description','Account','Type','Amount','Status']
+ ];
  transactions.forEach(t=>lines.push([t.date,`"${t.desc.replace(/"/g,'""')}"`,`"${t.account}"`,t.type,t.amount,t.status]));
- const blob=new Blob([lines.map(r=>r.join(',')).join('\n')],{type:'text/csv'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='FinEase_Financial_Report.csv';a.click();
+ downloadFile('FinEase_Financial_Report.csv',lines.map(r=>r.join(',')).join('\n'),'text/csv');
  addLog('Exported CSV financial report');
  toast('CSV Report downloaded');
+}
+
+function exportPrintableStatement(){
+ const rev=transactions.filter(t=>t.type==='Income').reduce((s,t)=>s+Number(t.amount),0);
+ const exp=transactions.filter(t=>t.type==='Expense').reduce((s,t)=>s+Number(t.amount),0);
+ const net=rev-exp;
+ const invVal=items.reduce((s,x)=>s+(x.qty*x.price),0);
+ const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>FinEase Statement</title>
+ <style>body{font-family:Arial,sans-serif;padding:40px;color:#1e293b;max-width:800px;margin:auto}h1{color:#142b4a;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin:20px 0}th,td{border:1px solid #cbd5e1;padding:10px;text-align:left}th{background:#f1f5f9}.tot{font-weight:bold;background:#f8fafc}</style>
+ </head><body><h1>FinEase Financial Statements</h1><p>Organization: <b>${esc($('orgType').value)}</b> | Date: ${new Date().toLocaleDateString()}</p>
+ <h3>1. Income Statement</h3><table><tr><th>Item</th><th>Amount</th></tr><tr><td>Total Operating Revenue</td><td>${fmt(rev)}</td></tr><tr><td>Total Operating Expenses</td><td>(${fmt(exp)})</td></tr><tr class="tot"><td>Net Income</td><td>${fmt(net)}</td></tr></table>
+ <h3>2. Balance Sheet</h3><table><tr><th>Account</th><th>Amount</th></tr><tr><td>Cash Balance</td><td>${fmt(net)}</td></tr><tr><td>Inventory Assets</td><td>${fmt(invVal)}</td></tr><tr class="tot"><td>Total Assets & Equity</td><td>${fmt(net+invVal)}</td></tr></table>
+ <h3>3. Transaction Ledger</h3><table><tr><th>Date</th><th>Description</th><th>Account</th><th>Type</th><th>Amount</th></tr>${transactions.map(t=>`<tr><td>${t.date}</td><td>${esc(t.desc)}</td><td>${esc(t.account)}</td><td>${t.type}</td><td>${fmt(t.amount)}</td></tr>`).join('')}</table></body></html>`;
+ downloadFile('FinEase_Financial_Statements.html',html,'text/html');
+ addLog('Exported Printable Financial Statement');
+ toast('Financial Statement downloaded');
 }
 
 /* AI ASSISTANT */
@@ -559,19 +643,20 @@ function askAI(promptText){
  const lowItems=items.filter(x=>x.qty<=10);
 
  let reply='';
- if(q.includes('health')||q.includes('margin')||q.includes('summar')){
+ if(q.includes('health')||q.includes('margin')||q.includes('summar')||q.includes('profit')){
   const margin=rev?((net/rev)*100).toFixed(1):0;
-  reply=`Your total revenue is <b>${fmt(rev)}</b> and expenses are <b>${fmt(exp)}</b>, leaving a net income of <b>${fmt(net)}</b> (${margin}% profit margin).`;
+  reply=`Your total revenue is <b>${fmt(rev)}</b> and expenses are <b>${fmt(exp)}</b>, resulting in a net income of <b>${fmt(net)}</b> (a <b>${margin}%</b> net profit margin).`;
  }else if(q.includes('inventory')||q.includes('stock')){
   reply=lowItems.length
-   ? `Attention needed: <b>${lowItems.map(i=>`${i.name} (${i.qty} ${i.unit})`).join(', ')}</b> are at or below 10 units.`
+   ? `Stock Alert: <b>${lowItems.map(i=>`${i.name} (${i.qty} ${i.unit})`).join(', ')}</b> are at or below 10 units and should be restocked soon.`
    : `All ${items.length} inventory items are well-stocked above the 10-unit threshold.`;
  }else if(q.includes('tax')||q.includes('vat')){
-  reply=`Based on ${fmt(rev)} in revenue and ${fmt(exp)} in expenses, your estimated 12% Output VAT is <b>${fmt(rev*0.12)}</b> and Input VAT is <b>${fmt(exp*0.12)}</b>.`;
- }else if(q.includes('ledger')||q.includes('post')){
-  reply=`Every <b>Income</b> entry automatically debits <i>Cash</i> and credits your chosen revenue account. Every <b>Expense</b> entry debits the expense account and credits <i>Cash</i>.`;
+  const outV=rev*0.12,inV=exp*0.12;
+  reply=`Based on ${fmt(rev)} in revenue and ${fmt(exp)} in expenses, your estimated 12% Output VAT is <b>${fmt(outV)}</b> and Input VAT is <b>${fmt(inV)}</b> (Net VAT Payable: <b>${fmt(Math.max(0,outV-inV))}</b>).`;
+ }else if(q.includes('ledger')||q.includes('post')||q.includes('debit')||q.includes('credit')){
+  reply=`Every <b>Income</b> entry automatically debits <i>Cash</i> and credits your chosen revenue account. Every <b>Expense</b> entry debits the expense account and credits <i>Cash</i> so your General Ledger stays balanced.`;
  }else{
-  reply=`You currently have <b>${transactions.length} transactions</b> totaling <b>${fmt(net)}</b> in net cash balance and <b>${items.length} inventory items</b> tracked.`;
+  reply=`You currently have <b>${transactions.length} transactions</b> totaling <b>${fmt(net)}</b> in net cash balance and <b>${items.length} inventory items</b> tracked. Try asking about profit margins, VAT estimates, or low stock!`;
  }
  box.innerHTML+=`<div class="msg ai">${reply}</div>`;
  box.scrollTop=box.scrollHeight;
@@ -583,18 +668,17 @@ function renderLogs(){
 }
 
 function downloadBackup(){
- const payload={org:$('orgType').value,exportedAt:new Date().toISOString(),transactions,items};
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='FinEase_Backup.json';a.click();
+ const payload={app:'FinEase',org:$('orgType').value,exportedAt:new Date().toISOString(),transactions,items,checklist};
+ downloadFile('FinEase_Backup.json',JSON.stringify(payload,null,2),'application/json');
  addLog('Downloaded full JSON system backup');
- toast('Backup downloaded');
+ toast('JSON Backup downloaded');
 }
 
 function resetDemoData(){
  if(!confirm('Reset all transactions and inventory back to default demo records?'))return;
- items=structuredClone(starterItems);
- transactions=structuredClone(starterTx);
- checklist=structuredClone(starterChecklist);
+ items=JSON.parse(JSON.stringify(starterItems));
+ transactions=JSON.parse(JSON.stringify(starterTx));
+ checklist=JSON.parse(JSON.stringify(starterChecklist));
  addLog('Reset workspace to default demo data');
  saveAll();
  toast('Demo data restored');
@@ -615,177 +699,169 @@ function updateAdmin(){
  renderInventory();
 }
 
-/* EVENT BINDINGS & INITIALIZATION */
-document.addEventListener('DOMContentLoaded', () => {
- // Navigation sidebar buttons
- document.querySelectorAll('.nav button').forEach(b => {
-  b.onclick = () => showPage(b.dataset.page);
+function init(){
+ document.querySelectorAll('.nav button').forEach(b=>{
+  b.onclick=()=>showPage(b.dataset.page);
  });
 
- // Header & Dashboard action buttons
- if($('adminBtn')) {
-  $('adminBtn').onclick = () => {
-   if(isAdmin) {
-    isAdmin = false;
-    updateAdmin();
-    addLog('Signed out of Administrator mode');
-   } else {
-    $('loginModal').classList.add('show');
-   }
+ $('adminBtn').onclick=()=>{
+  if(isAdmin){
+   isAdmin=false;
+   updateAdmin();
+   addLog('Signed out of Administrator mode');
+   toast('Signed out');
+  }else{
+   $('loginModal').classList.add('show');
+  }
+ };
+
+ $('dashNewTxBtn').onclick=openAddTx;
+ $('txNewBtn').onclick=openAddTx;
+ $('dashViewAllTx').onclick=()=>showPage('transactions');
+ $('ledgerPostBtn').onclick=openAddTx;
+
+ $('addItemBtn').onclick=()=>{
+  if(!isAdmin){pendingAdd=true;$('loginModal').classList.add('show');return;}
+  openAddItem();
+ };
+
+ $('taxChecklistBtn').onclick=()=>openTaxModal('checklist');
+ $('taxCalendarCard').onclick=()=>openTaxModal('calendar');
+ $('taxRecordsCard').onclick=()=>openTaxModal('records');
+ $('taxTasksCard').onclick=()=>openTaxModal('checklist');
+ $('exportTaxBtn').onclick=exportTaxReport;
+
+ $('exportCsvBtn').onclick=exportCSVReport;
+ $('exportPrintReportBtn').onclick=exportPrintableStatement;
+ $('repIncomeCard').onclick=()=>openReportModal('income');
+ $('repBalanceCard').onclick=()=>openReportModal('balance');
+ $('repCashflowCard').onclick=()=>openReportModal('cashflow');
+
+ $('secDownloadBtn').onclick=downloadBackup;
+ $('secExportCard').onclick=downloadBackup;
+ $('secRoleCard').onclick=()=>$('adminBtn').click();
+ $('secResetCard').onclick=resetDemoData;
+
+ $('secRestoreBtn').onclick=()=>$('restoreFileInput').click();
+ $('restoreFileInput').onchange=e=>{
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+   try{
+    const data=JSON.parse(ev.target.result);
+    if(Array.isArray(data.transactions))transactions=data.transactions;
+    if(Array.isArray(data.items))items=data.items;
+    if(Array.isArray(data.checklist))checklist=data.checklist;
+    saveAll();
+    addLog('Restored data from backup file: '+file.name);
+    toast('Backup restored successfully');
+   }catch(err){alert('Invalid backup JSON file.');}
   };
- }
+  reader.readAsText(file);
+  e.target.value='';
+ };
 
- if($('dashNewTxBtn')) $('dashNewTxBtn').onclick = openAddTx;
- if($('txNewBtn')) $('txNewBtn').onclick = openAddTx;
- if($('dashViewAllTx')) $('dashViewAllTx').onclick = () => showPage('transactions');
- if($('ledgerPostBtn')) $('ledgerPostBtn').onclick = openAddTx;
+ $('loginCancelBtn').onclick=()=>$('loginModal').classList.remove('show');
+ $('loginSubmitBtn').onclick=()=>{
+  if($('username').value==='admin'&&$('password').value==='finEaseDemo2026'){
+   isAdmin=true;
+   $('loginModal').classList.remove('show');
+   updateAdmin();
+   addLog('Signed in as Administrator');
+   toast('Administrator mode active');
+   if(pendingAdd){pendingAdd=false;openAddItem();}
+  }else alert('Incorrect demo login. Use admin / finEaseDemo2026');
+ };
 
- // Inventory Add button
- if($('addItemBtn')) {
-  $('addItemBtn').onclick = () => {
-   if(!isAdmin) {
-    pendingAdd = true;
-    $('loginModal').classList.add('show');
-    return;
-   }
-   openAddItem();
+ $('txCancelBtn').onclick=closeTxModal;
+ $('itemCancelBtn').onclick=closeItem;
+ $('infoCloseBtn').onclick=closeInfoModal;
+ $('infoExportCsvBtn').onclick=exportCSVReport;
+ $('infoExportStatementBtn').onclick=exportPrintableStatement;
+
+ $('txForm').onsubmit=e=>{
+  e.preventDefault();
+  const entry={
+   date:$('txDate').value,
+   type:$('txType').value,
+   desc:$('txDesc').value.trim(),
+   account:$('txAccount').value,
+   amount:Number($('txAmount').value),
+   status:$('txStatus').value
   };
- }
+  const idx=$('txEditIndex').value;
+  if(idx===''){
+   transactions.unshift(entry);
+   addLog(`Added ${entry.type.toLowerCase()}: "${entry.desc}" (${fmt(entry.amount)})`);
+   toast('Transaction added & posted to ledger');
+  }else{
+   transactions[Number(idx)]=entry;
+   addLog(`Updated transaction: "${entry.desc}"`);
+   toast('Transaction updated');
+  }
+  saveAll();
+  closeTxModal();
+ };
 
- // Tax Center buttons & cards
- if($('taxChecklistBtn')) $('taxChecklistBtn').onclick = () => openTaxModal('checklist');
- if($('taxCalendarCard')) $('taxCalendarCard').onclick = () => openTaxModal('calendar');
- if($('taxRecordsCard')) $('taxRecordsCard').onclick = () => openTaxModal('records');
- if($('taxTasksCard')) $('taxTasksCard').onclick = () => openTaxModal('checklist');
-
- // Report buttons & cards
- if($('exportCsvBtn')) $('exportCsvBtn').onclick = exportCSVReport;
- if($('repIncomeCard')) $('repIncomeCard').onclick = () => openReportModal('income');
- if($('repBalanceCard')) $('repBalanceCard').onclick = () => openReportModal('balance');
- if($('repCashflowCard')) $('repCashflowCard').onclick = () => openReportModal('cashflow');
-
- // Security & Backup buttons
- if($('secDownloadBtn')) $('secDownloadBtn').onclick = downloadBackup;
- if($('secExportCard')) $('secExportCard').onclick = downloadBackup;
- if($('secRoleCard')) $('secRoleCard').onclick = () => $('adminBtn').click();
- if($('secResetCard')) $('secResetCard').onclick = resetDemoData;
-
- // Modals Close / Cancel buttons
- if($('loginCancelBtn')) $('loginCancelBtn').onclick = () => $('loginModal').classList.remove('show');
- if($('loginSubmitBtn')) {
-  $('loginSubmitBtn').onclick = () => {
-   if($('username').value==='admin'&&$('password').value==='finEaseDemo2026'){
-    isAdmin=true;
-    $('loginModal').classList.remove('show');
-    updateAdmin();
-    addLog('Signed in as Administrator');
-    toast('Administrator mode active');
-    if(pendingAdd){pendingAdd=false;openAddItem();}
-   }else alert('Incorrect demo login. Use admin / finEaseDemo2026');
+ $('itemForm').onsubmit=e=>{
+  e.preventDefault();
+  if(!isAdmin)return;
+  let x={
+   code:$('code').value.trim(),
+   name:$('name').value.trim(),
+   category:$('category').value,
+   qty:Number($('qty').value),
+   unit:$('unit').value.trim(),
+   price:Number($('price').value)
   };
- }
+  let i=$('editIndex').value;
+  if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){
+   alert('Item code already exists.');
+   return;
+  }
+  if(i===''){
+   items.push(x);
+   addLog(`Added inventory item ${x.code} (${x.name})`);
+  }else{
+   items[Number(i)]=x;
+   addLog(`Updated inventory item ${x.code}`);
+  }
+  saveAll();
+  closeItem();
+  toast('Inventory saved');
+ };
 
- if($('txCancelBtn')) $('txCancelBtn').onclick = closeTxModal;
- if($('itemCancelBtn')) $('itemCancelBtn').onclick = closeItem;
- if($('infoCloseBtn')) $('infoCloseBtn').onclick = closeInfoModal;
- if($('infoExportCsvBtn')) $('infoExportCsvBtn').onclick = exportCSVReport;
+ document.querySelectorAll('#aiChips .chip-btn').forEach(btn=>{
+  btn.onclick=()=>askAI(btn.dataset.q);
+ });
 
- // Forms submit handlers
- const txForm = $('txForm');
- if(txForm) {
-  txForm.onsubmit = e => {
-   e.preventDefault();
-   const entry={
-    date:$('txDate').value,
-    type:$('txType').value,
-    desc:$('txDesc').value.trim(),
-    account:$('txAccount').value,
-    amount:Number($('txAmount').value),
-    status:$('txStatus').value
-   };
-   const idx=$('txEditIndex').value;
-   if(idx===''){
-    transactions.unshift(entry);
-    addLog(`Added ${entry.type.toLowerCase()}: "${entry.desc}" (${fmt(entry.amount)})`);
-    toast('Transaction added & posted to ledger');
-   }else{
-    transactions[Number(idx)]=entry;
-    addLog(`Updated transaction: "${entry.desc}"`);
-    toast('Transaction updated');
-   }
-   saveAll();
-   closeTxModal();
-  };
- }
+ $('aiForm').onsubmit=e=>{
+  e.preventDefault();
+  const val=$('aiInput').value.trim();
+  if(!val)return;
+  $('aiInput').value='';
+  askAI(val);
+ };
 
- const itemForm = $('itemForm');
- if(itemForm) {
-  itemForm.onsubmit = e => {
-   e.preventDefault();
-   if(!isAdmin)return;
-   let x={
-    code:$('code').value.trim(),
-    name:$('name').value.trim(),
-    category:$('category').value,
-    qty:Number($('qty').value),
-    unit:$('unit').value.trim(),
-    price:Number($('price').value)
-   };
-   let i=$('editIndex').value;
-   if(items.some((v,j)=>v.code.toLowerCase()===x.code.toLowerCase()&&String(j)!==i)){
-    alert('Item code already exists.');
-    return;
-   }
-   if(i===''){
-    items.push(x);
-    addLog(`Added inventory item ${x.code} (${x.name})`);
-   }else{
-    items[Number(i)]=x;
-    addLog(`Updated inventory item ${x.code}`);
-   }
-   saveAll();
-   closeItem();
-   toast('Inventory saved');
-  };
- }
+ $('txType').onchange=()=>syncTxAccounts();
+ $('orgType').onchange=()=>{
+  $('orgSubtitle').textContent=`Here's an overview of your ${$('orgType').value} accounting activity.`;
+  addLog(`Switched organization profile to ${$('orgType').value}`);
+ };
+ $('search').oninput=renderInventory;
+ $('categoryFilter').onchange=renderInventory;
+ $('txSearch').oninput=renderTransactions;
+ $('txTypeFilter').onchange=renderTransactions;
 
- const aiForm = $('aiForm');
- if(aiForm) {
-  aiForm.onsubmit = e => {
-   e.preventDefault();
-   const val=$('aiInput').value.trim();
-   if(!val)return;
-   $('aiInput').value='';
-   askAI(val);
-  };
- }
-
- const txTypeSelect = $('txType');
- if(txTypeSelect) txTypeSelect.onchange = () => syncTxAccounts();
-
- const orgTypeSelect = $('orgType');
- if(orgTypeSelect) {
-  orgTypeSelect.onchange = () => {
-   if($('orgSubtitle')) $('orgSubtitle').textContent=`Here's an overview of your ${orgTypeSelect.value} accounting activity.`;
-   addLog(`Switched organization profile to ${orgTypeSelect.value}`);
-  };
- }
-
- const searchInput = $('search');
- if(searchInput) searchInput.oninput = renderInventory;
-
- const categoryFilter = $('categoryFilter');
- if(categoryFilter) categoryFilter.onchange = renderInventory;
-
- const txSearch = $('txSearch');
- if(txSearch) txSearch.oninput = renderTransactions;
-
- const txTypeFilter = $('txTypeFilter');
- if(txTypeFilter) txTypeFilter.onchange = renderTransactions;
-
- // Initial render
  renderAll();
-});
+}
+
+if(document.readyState==='loading'){
+ document.addEventListener('DOMContentLoaded',init);
+}else{
+ init();
+}
 </script>
 </body>
 </html>
